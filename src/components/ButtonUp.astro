@@ -1,8 +1,9 @@
-<a href="javascript:void(0)" id="back-to-top-link">↑</a>
+<a href="#top" id="back-to-top-link">↑</a>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('back-to-top-link').addEventListener('click', function() {
+    document.getElementById('back-to-top-link').addEventListener('click', function(event) {
+      event.preventDefault();
       const scrollContainer = document.getElementById('scroll-container');
       scrollContainer.scrollTo({top: 0, behavior: 'smooth'});
     });
