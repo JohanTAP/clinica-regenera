@@ -1,0 +1,152 @@
+---
+---
+
+<nav class="navbar" aria-label="Menú de navegación principal">
+  <div class="container">
+    <a class="navbar__brand" href="/" aria-label="Inicio">
+      <img src="/assets/images/logo.webp" alt="Logotipo de Clínica Regenera" class="navbar__logo">
+    </a>
+    <button class="navbar__toggler" id="navbarToggler" aria-label="Abrir menú de navegación">
+      <span class="navbar__toggler-icon"></span>
+      <span class="navbar__toggler-icon"></span>
+      <span class="navbar__toggler-icon"></span>
+    </button>
+    <div class="navbar__collapse" id="navbarMenu">
+      <ul class="navbar__nav">
+        <li class="navbar__item">
+          <a class="navbar__link smooth-scroll" href="#tratamientos">Tratamientos</a>
+        </li>
+        <li class="navbar__item">
+          <a class="navbar__link smooth-scroll" href="#tu-cita">Tu cita</a>
+        </li>
+        <li class="navbar__item">
+          <a class="navbar__link smooth-scroll" href="#testimonio">Testimonio</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+
+  .navbar__brand .navbar__logo {
+    width: 149px;
+    height: 48px;
+  }
+
+  .navbar__toggler {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: none;
+    position: relative;
+    z-index: 1100;
+  }
+
+  .navbar__toggler-icon {
+    width: 30px;
+    height: 2px;
+    background-color: #fff;
+    display: block;
+    margin: 6px 0;
+  }
+
+  .navbar__collapse {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar__nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar__item {
+    margin-left: 1rem;
+  }
+
+  .navbar__link {
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    text-decoration: none;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.4s ease;
+  }
+
+  .navbar__link::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #3DB7B0;
+    transition: width 0.4s ease;
+    -webkit-transition: width 0.4s ease;
+  }
+
+  .navbar__link:hover,
+  .navbar__link:focus {
+    color: #3DB7B0;
+  }
+
+  .navbar__link:hover::after,
+  .navbar__link:focus::after {
+    width: 100%;
+    left: 0;
+    background: #3DB7B0;
+  }
+
+  @media (max-width: 768px) {
+    .navbar__toggler {
+      display: block; 
+    }
+
+    .navbar__collapse {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.1);
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
+
+    .navbar__collapse.show {
+      display: flex;
+    }
+
+    .navbar__item {
+      margin: 0;
+      text-align: center;
+      padding: 1rem;
+    }
+  }
+</style>

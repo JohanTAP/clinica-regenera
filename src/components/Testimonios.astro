@@ -1,0 +1,135 @@
+---
+---
+
+<section class="carousel bg-testimonios py-5" id="testimonio" aria-labelledby="testimonio-heading">
+  <h2 id="testimonio-heading" class="visually-hidden">Testimonios</h2>
+  <div class="carousel__inner">
+    <div class="carousel__item carousel__item--active text-center" role="region" aria-live="polite">
+      <p class="carousel__texto">"Saliendo de Clínica Regenera <br>Me siento renovado, con energía <br><span class="carousel__destacado">ME SIENTO POWER</span>"</p>
+      <p class="carousel__autor">Fidel Soto</p>
+      <p class="carousel__autor">Periodista TVN</p>
+    </div>
+    <div class="carousel__item text-center" role="region" aria-live="polite">
+      <p class="carousel__texto">"Sufría de dolores lumbares y cervicales por mi trabajo, pero después de mi primera sesión con Eduardo, <br>los dolores disminuyeron significativamente. <br><span class="carousel__destacado">¡Gracias por el cariño y la buena onda!"</span></p>
+      <p class="carousel__autor">Claudia Cifuentes</p>
+      <p class="carousel__autor">Paciente</p>
+    </div>
+  </div>
+  <div class="carousel__link">
+    <a href="#" id="nextTestimonio" aria-label="Ve más testimonios aquí">Ve más testimonios aquí <span class="carousel__arrow">→</span></a>
+  </div>
+</section>
+
+<style>
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #3DB7B0;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel__inner {
+  position: relative;
+  width: 100%;
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel__item {
+  min-width: 100%;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.carousel__item--active {
+  opacity: 1;
+  position: relative;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.carousel__texto {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.carousel__destacado {
+  font-weight: bold;
+  color: #ffd700;
+}
+
+.carousel__autor {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.carousel__link {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  padding-right: 75px;
+}
+
+.carousel__link a {
+  color: #ffd700;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  position: relative;
+  transition: color 0.4s ease;
+}
+
+.carousel__link a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  display: block;
+  margin-top: 5px;
+  right: 0;
+  background: #fff;
+  transition: width 0.4s ease;
+}
+
+.carousel__link a:hover,
+.carousel__link a:focus {
+  color: white;
+}
+
+.carousel__link a:hover::after,
+.carousel__link a:focus::after {
+  width: 100%;
+  left: 0;
+  background: white;
+}
+
+.carousel__arrow {
+  font-size: 1.5rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+</style>

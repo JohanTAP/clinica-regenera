@@ -1,0 +1,36 @@
+<a href="javascript:void(0)" id="back-to-top-link">↑</a>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('back-to-top-link').addEventListener('click', function() {
+      const scrollContainer = document.getElementById('scroll-container');
+      scrollContainer.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  });
+</script>
+
+<style>
+  #back-to-top-link {
+    display: inline-block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #F6C61B;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+
+    font-weight: bold;
+    transition: all 0.4s ease;
+    margin: 10px 0.5rem;
+    cursor: pointer;
+  }
+
+  #back-to-top-link:hover {
+    background-color: #D5A517;
+  }
+</style>
