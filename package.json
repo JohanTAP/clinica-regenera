@@ -10,6 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.12.2"
+    "@justinribeiro/lite-youtube": "^1.5.0",
+    "astro": "^4.12.2",
+    "lite-youtube-embed": "^0.3.3"
   }
 }

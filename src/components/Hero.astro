@@ -1,207 +1,228 @@
 ---
+
 ---
 
 <section class="hero" aria-labelledby="hero-heading">
   <div class="hero__image">
-    <img src="/assets/images/logo-blanco.webp" width="344" height="326" alt="Logotipo de Clínica Regenera" class="hero__logo">
+    <img
+      src="/assets/images/logo-blanco.webp"
+      width="344"
+      height="326"
+      alt="Logotipo de Clínica Regenera"
+      class="hero__logo"
+    />
   </div>
   <div class="hero__texts">
-    <h1 id="hero-heading">Vive una vida <span class="text-gradient">sin dolor</span></h1>
+    <h1 id="hero-heading">
+      Vive una vida <span class="text-gradient">sin dolor</span>
+    </h1>
     <p class="hero__instructions">
       Kinesiología, Quiropraxia, Osteopatía y Medicina Ortopédica.
     </p>
   </div>
   <div class="hero__buttons">
-    <button class="btn btn-primary" id="openModalButton" aria-label="Reservar hora">Reservar hora</button>
-    <button class="btn btn-secondary" onclick="window.location.href='#tu-cita'" aria-label="Conoce más">Conoce más</button>
+    <button
+      class="btn btn-primary"
+      id="openModalButton"
+      aria-label="Reservar hora">Reservar hora</button
+    >
+    <button
+      class="btn btn-secondary"
+      onclick="window.location.href='#tu-cita'"
+      aria-label="Conoce más">Conoce más</button
+    >
   </div>
 </section>
 
 <style>
-.hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  background-image: url('/assets/images/fondo.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: white;
-}
-
-.hero__image img {
-  display: block;
-  margin-bottom: 10px;
-}
-
-.hero__texts h1 {
-  font-weight: 700;
-  font-size: 60px;
-  line-height: 72px;
-  letter-spacing: -0.06em;
-  margin: 0;
-}
-
-.hero__instructions {
-  font-weight: 400;
-  font-size: 31px;
-  line-height: 37.2px;
-  letter-spacing: -0.06em;
-  margin-top: 1rem;
-}
-
-.hero__buttons {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 30px;
-  transition: all 0.4s ease;
-  margin: 10px 0.5rem;
-  cursor: pointer;
-  width: 231px;
-  height: 57px;
-  background-color: transparent;
-  color: white;
-}
-
-.btn-primary,
-.btn-secondary {
-  border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-secondary:hover,
-.btn-secondary:focus,
-.btn-secondary:active {
-  border-color: #3DB7B0;
-  color: #3DB7B0;
-}
-
-.text-gradient {
-  background-image: linear-gradient(45deg, #00c6ff, #0072ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 400%;
-  background-position: 0%;
-}
-
-@media (max-width: 1200px) {
-  .hero__texts h1 {
-    font-size: 50px;
-    line-height: 60px;
-  }
-
-  .hero__instructions {
-    font-size: 26px;
-    line-height: 32px;
-  }
-
-  .btn {
-    width: 200px;
-    height: 50px;
-  }
-}
-
-@media (max-width: 1024px) {
   .hero {
+    position: relative;
+    width: 100%;
     height: 100vh;
-    padding-top: 60px;
+    overflow: hidden;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(27, 81, 78, 0.8) 0%,
+        rgba(61, 183, 176, 0.8) 100%
+      ),
+      url("/assets/images/fondo.webp") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
   }
 
   .hero__image img {
-    width: 75%;
-    max-width: 300px;
-    height: auto;
-    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
   }
 
   .hero__texts h1 {
-    font-size: 40px;
-    line-height: 48px;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 72px;
+    letter-spacing: -0.06em;
+    margin: 0;
   }
 
   .hero__instructions {
-    font-size: 22px;
-    line-height: 28px;
+    font-weight: 400;
+    font-size: 31px;
+    line-height: 37.2px;
+    letter-spacing: -0.06em;
+    margin-top: 1rem;
+  }
+
+  .hero__buttons {
+    text-align: center;
+    margin-top: 20px;
   }
 
   .btn {
-    width: 180px;
-    height: 45px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero {
-    height: 100vh;
-    padding-top: 40px;
-  }
-
-  .hero__image img {
-    width: 75%;
-    max-width: 250px;
-    height: auto;
-    margin: 0 auto;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.4s ease;
+    margin: 10px 0.5rem;
+    cursor: pointer;
+    width: 231px;
+    height: 57px;
+    background-color: transparent;
+    color: white;
   }
 
-  .hero__texts h1 {
-    font-size: 32px;
-    line-height: 38px;
+  .btn-primary,
+  .btn-secondary {
+    border: 2px solid rgba(255, 255, 255, 0.3);
   }
 
-  .hero__instructions {
-    font-size: 18px;
-    line-height: 24px;
+  .btn-primary:hover,
+  .btn-primary:focus,
+  .btn-primary:active,
+  .btn-secondary:hover,
+  .btn-secondary:focus,
+  .btn-secondary:active {
+    border-color: #3db7b0;
+    color: #3db7b0;
   }
 
-  .btn {
-    width: 160px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero {
-    height: 100vh;
-    padding-top: 20px;
+  .text-gradient {
+    background-image: linear-gradient(45deg, #00c6ff, #0072ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
   }
 
-  .hero__image img {
-    width: 75%;
-    max-width: 200px;
-    height: auto;
-    margin: 0 auto;
+  @media (max-width: 1200px) {
+    .hero__texts h1 {
+      font-size: 50px;
+      line-height: 60px;
+    }
+
+    .hero__instructions {
+      font-size: 26px;
+      line-height: 32px;
+    }
+
+    .btn {
+      width: 200px;
+      height: 50px;
+    }
   }
 
-  .hero__texts h1 {
-    font-size: 28px;
-    line-height: 34px;
+  @media (max-width: 1024px) {
+    .hero {
+      height: 100vh;
+      padding-top: 60px;
+    }
+
+    .hero__image img {
+      width: 75%;
+      max-width: 300px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .hero__texts h1 {
+      font-size: 40px;
+      line-height: 48px;
+    }
+
+    .hero__instructions {
+      font-size: 22px;
+      line-height: 28px;
+    }
+
+    .btn {
+      width: 180px;
+      height: 45px;
+    }
   }
 
-  .hero__instructions {
-    font-size: 16px;
-    line-height: 20px;
+  @media (max-width: 768px) {
+    .hero {
+      height: 100vh;
+      padding-top: 40px;
+    }
+
+    .hero__image img {
+      width: 75%;
+      max-width: 250px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .hero__texts h1 {
+      font-size: 32px;
+      line-height: 38px;
+    }
+
+    .hero__instructions {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    .btn {
+      width: 160px;
+      height: 40px;
+    }
   }
 
-  .btn {
-    width: 160px;
-    height: 40px;
+  @media (max-width: 480px) {
+    .hero {
+      height: 100vh;
+      padding-top: 20px;
+    }
+
+    .hero__image img {
+      width: 75%;
+      max-width: 200px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .hero__texts h1 {
+      font-size: 28px;
+      line-height: 34px;
+    }
+
+    .hero__instructions {
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    .btn {
+      width: 160px;
+      height: 40px;
+    }
   }
-}
 </style>
