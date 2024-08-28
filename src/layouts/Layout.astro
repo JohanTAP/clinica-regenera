@@ -119,19 +119,6 @@ const { title } = Astro.props;
 		  </script>
 		  <script>
 			document.addEventListener('DOMContentLoaded', () => {
-				const carouselItems = document.querySelectorAll('.carousel__item');
-				let currentIndex = 0;
-
-				document.getElementById('nextTestimonio').addEventListener('click', (event) => {
-					event.preventDefault();
-					carouselItems[currentIndex].classList.remove('carousel__item--active');
-					currentIndex = (currentIndex + 1) % carouselItems.length;
-					carouselItems[currentIndex].classList.add('carousel__item--active');
-				});
-			});
-		  </script>
-		  <script>
-			document.addEventListener('DOMContentLoaded', () => {
 			  const modal = document.getElementById('modal');
 			  const closeModalButton = document.getElementById('closeModal');
 			  const scrollContainer = document.querySelector('.scroll-container');
