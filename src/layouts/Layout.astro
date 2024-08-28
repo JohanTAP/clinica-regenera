@@ -157,6 +157,32 @@ const { title } = Astro.props;
 			  scrollContainer.addEventListener('scroll', checkScroll);
 			});
 		  </script>
+		  <script>
+			document.addEventListener('DOMContentLoaded', () => {
+				// Configura la reproducción de video en todos los videos de la página
+				const setupVideoPlayback = (videoContainer) => {
+					const playButton = videoContainer.querySelector('.carousel__play-button');
+					const video = videoContainer.querySelector('video');
+					const thumbnail = videoContainer.querySelector('img');
+
+					if (playButton && video && thumbnail) {
+						playButton.addEventListener('click', function () {
+							// Ocultar la imagen de fondo y el botón
+							thumbnail.classList.add('hidden');
+							playButton.classList.add('hidden');
+
+							// Mostrar y reproducir el video
+							video.classList.remove('hidden');
+							video.play();
+						});
+					}
+				};
+
+				// Aplica la configuración a todos los videos en la página
+				const videoContainers = document.querySelectorAll('.carousel__video');
+				videoContainers.forEach(setupVideoPlayback);
+			});
+			</script> 
 	</body>
 </html>
 

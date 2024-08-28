@@ -1,5 +1,4 @@
 ---
-
 ---
 
 <section
@@ -129,7 +128,6 @@
 
   .tratamientos__item {
     flex-basis: calc(25% - 2rem);
-
     max-width: 425px;
     display: flex;
     flex-direction: column;
@@ -184,9 +182,15 @@
   }
 
   @media (max-width: 768px) {
+    .tratamientos__lista {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Asegura dos columnas */
+      grid-gap: 1rem; /* Espacio entre los elementos */
+    }
+
     .tratamientos__item {
-      flex-direction: column;
-      text-align: center;
+      flex-basis: 100%;
+      max-width: 100%;
     }
 
     .tratamientos__icono {

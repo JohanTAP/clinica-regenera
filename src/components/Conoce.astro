@@ -1,7 +1,10 @@
+---
+---
+
 <section class="servicios" id="tu-cita" aria-labelledby="servicios-heading">
   <h2 class="servicios__titulo">Bienvenido a Clínica Regenera</h2>
   <div class="servicios__contenedor servicios__contenedor--media">
-    <div class="media-card media-card--video">
+    <div class="carousel__video media-card media-card--video">
       <img
         src="/assets/images/video-thumb.webp"
         loading="lazy"
@@ -71,26 +74,6 @@
       alt="Imagen del Director"
     />
   </div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const playButton = document.querySelector(".carousel__play-button");
-      const video = document.getElementById("clinic-video");
-      const thumbnail = document.querySelector(".media-card__imagen");
-
-      if (playButton && video && thumbnail) {
-        playButton.addEventListener("click", function () {
-          // Ocultar la imagen de fondo y el botón
-          thumbnail.classList.add("hidden");
-          playButton.classList.add("hidden");
-
-          // Mostrar y reproducir el video
-          video.classList.remove("hidden");
-          video.classList.add("active");
-          (video as HTMLVideoElement).play();
-        });
-      }
-    });
-  </script>
 </section>
 
 <style>
@@ -169,12 +152,15 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50px; /* Asegura que el video respete el radio de borde */
+    border-radius: 50px;
     display: block;
-    position: relative;
-    opacity: 0;
+    opacity: 1; /* Asegura que el video esté visible cuando no esté oculto */
     transition: opacity 0.3s ease;
     z-index: 1;
+  }
+
+  .media-card__video.hidden {
+    display: none; /* Controla la visibilidad del video */
   }
 
   .media-card__video.active {
