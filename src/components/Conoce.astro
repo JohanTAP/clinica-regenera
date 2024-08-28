@@ -119,6 +119,7 @@
     align-items: center;
     cursor: pointer;
   }
+
   .servicios {
     margin: 0 auto;
     padding: 25px;
@@ -245,6 +246,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow-wrap: break-word; /* Permite que el texto se ajuste al contenedor */
+    box-sizing: border-box; /* Asegura que padding no cause desbordamiento */
   }
 
   .servicio-card__titulo {
@@ -263,6 +266,9 @@
     letter-spacing: -0.06em;
     color: #666;
     margin-bottom: 1rem;
+    word-wrap: break-word; /* Asegura que el texto se mantenga dentro del contenedor */
+    overflow: hidden; /* Oculta cualquier contenido que se desborde */
+    text-overflow: ellipsis; /* Añade puntos suspensivos si el texto se corta */
   }
 
   @media (max-width: 1024px) {
