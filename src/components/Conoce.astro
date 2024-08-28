@@ -13,7 +13,7 @@
         id="clinic-video"
         class="media-card__video"
         controls
-        style="display: none;"
+        class="hidden"
       >
         <source src="/video1.mp4" type="video/mp4" />
         Tu navegador no soporta la reproducción de videos.
@@ -78,23 +78,20 @@
   </div>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const playButton = document.querySelector(
-        ".carousel__play-button"
-      ) as HTMLButtonElement;
-      const video = document.getElementById("clinic-video") as HTMLVideoElement;
-      const thumbnail = document.querySelector(
-        ".media-card__imagen"
-      ) as HTMLImageElement;
+      const playButton = document.querySelector(".carousel__play-button");
+      const video = document.getElementById("clinic-video");
+      const thumbnail = document.querySelector(".media-card__imagen");
 
       if (playButton && video && thumbnail) {
         playButton.addEventListener("click", function () {
           // Ocultar la imagen de fondo y el botón
-          thumbnail.style.display = "none";
-          playButton.style.display = "none";
+          thumbnail.classList.add("hidden");
+          playButton.classList.add("hidden");
 
           // Mostrar y reproducir el video
-          video.style.display = "block";
-          video.play();
+          video.classList.remove("hidden");
+          video.classList.add("active");
+          (video as HTMLVideoElement).play();
         });
       }
     });
@@ -118,6 +115,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    z-index: 3;
   }
 
   .servicios {
@@ -176,22 +174,33 @@
     object-fit: cover;
     border-radius: 15px;
     display: block;
-    position: absolute; /* Asegura que ocupe todo el contenedor */
-    top: 0;
-    left: 0;
+    position: relative; /* Cambiado de absolute a relative */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .media-card__video.active {
+    opacity: 1;
+    z-index: 10; /* Forzar que esté encima de todo cuando se reproduce */
+  }
+
+  .hidden {
+    display: none;
   }
 
   .media-card--video {
-    position: relative; /* Necesario para el posicionamiento absoluto del video */
-    width: 342px;
-    height: 566px;
-    overflow: hidden; /* Asegura que no haya desbordamiento */
-    border-radius: 15px;
+    position: relative;
+    width: 342px; /* Ajustado a 342px */
+    height: 566px; /* Ajustado a 566px */
+    overflow: hidden;
+    border-radius: 25px; /* Ajustado a 50px */
   }
 
   .media-card--image {
-    width: 876px;
-    height: 566px;
+    width: 876px; /* Ajustado a 876px */
+    height: 566px; /* Ajustado a 566px */
+    border-radius: 25px; /* Ajustado a 50px */
   }
 
   .media-card__imagen {
@@ -240,14 +249,14 @@
   }
 
   .servicio-card__contenido {
-    width: 100%; /* Ocupa todo el ancho disponible */
-    padding: 2rem; /* Espaciado interno para mayor claridad */
+    width: 100%;
+    padding: 2rem;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow-wrap: break-word; /* Permite que el texto se ajuste al contenedor */
-    box-sizing: border-box; /* Asegura que padding no cause desbordamiento */
+    overflow-wrap: break-word;
+    box-sizing: border-box;
   }
 
   .servicio-card__titulo {
@@ -266,9 +275,9 @@
     letter-spacing: -0.06em;
     color: #666;
     margin-bottom: 1rem;
-    word-wrap: break-word; /* Asegura que el texto se mantenga dentro del contenedor */
-    overflow: hidden; /* Oculta cualquier contenido que se desborde */
-    text-overflow: ellipsis; /* Añade puntos suspensivos si el texto se corta */
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   @media (max-width: 1024px) {
