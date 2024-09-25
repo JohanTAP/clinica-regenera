@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@justinribeiro/lite-youtube": "^1.5.0",
-    "astro": "^4.12.2",
+    "astro": "^4.15.9",
     "lite-youtube-embed": "^0.3.3"
   }
 }

@@ -87,24 +87,28 @@ const { title } = Astro.props;
 		</script>
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {
-			  const smoothScrollLinks = document.querySelectorAll('.smooth-scroll');
-		  
-			  smoothScrollLinks.forEach(link => {
-				link.addEventListener('click', function (event) {
-				  event.preventDefault();
-				  const targetId = this.getAttribute('href').substring(1);
-				  const targetElement = document.getElementById(targetId);
-				  if (targetElement) {
-					const scrollContainer = document.getElementById('scroll-container');
-					scrollContainer.scrollTo({
-					  top: targetElement.offsetTop,
-					  behavior: 'smooth'
-					});
-				  }
+				const smoothScrollLinks = document.querySelectorAll('.smooth-scroll');
+				smoothScrollLinks.forEach(link => {
+					const href = link.getAttribute('href');
+
+					// Solo prevenir el comportamiento por defecto para enlaces internos que usan #
+					if (href.startsWith("#")) {
+						link.addEventListener('click', function (event) {
+							event.preventDefault();
+							const targetId = href.substring(1);
+							const targetElement = document.getElementById(targetId);
+							if (targetElement) {
+								const scrollContainer = document.querySelector('.scroll-container');
+								scrollContainer.scrollTo({
+									top: targetElement.offsetTop,
+									behavior: 'smooth'
+								});
+							}
+						});
+					}
 				});
-			  });
 			});
-		  </script>
+		</script>
 		  <script>
 			document.addEventListener('DOMContentLoaded', () => {
 			  const openModalButton = document.getElementById('openModalButton');
