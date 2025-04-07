@@ -1,0 +1,140 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import BlogCard from "../../components/blog/BlogCard.astro";
+import { getCollection } from "astro:content";
+import ButtonUp from "../../components/ButtonUp.astro";
+
+// Obtener todas las entradas del blog ordenadas por fecha de publicación (más recientes primero)
+const posts = await getCollection("blog");
+const sortedPosts = posts.sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+// Variables para el diseño de la página
+const title = "Blog | Clínica Regenera";
+const description =
+    "Artículos e información sobre salud, bienestar, quiropraxia, kinesiología, osteopatía y más.";
+---
+
+<Layout title={title}>
+    <Navbar />
+    <div class="scroll-container" id="scroll-container">
+        <header class="blog-header">
+            <div class="blog-header__content">
+                <h1 class="blog-header__title">Blog de Salud y Bienestar</h1>
+                <p class="blog-header__description">{description}</p>
+            </div>
+        </header>
+
+        <main class="blog-main">
+            <div class="blog-grid">
+                {
+                    sortedPosts.length > 0 ? (
+                        sortedPosts.map((post) => (
+                            <div class="blog-grid__item">
+                                <BlogCard post={post} />
+                            </div>
+                        ))
+                    ) : (
+                        <p class="blog-empty">
+                            Próximamente publicaremos artículos sobre salud y
+                            bienestar. ¡Vuelve pronto!
+                        </p>
+                    )
+                }
+            </div>
+        </main>
+
+        <Footer />
+        <ButtonUp />
+    </div>
+</Layout>
+
+<style>
+    .blog-header {
+        background: linear-gradient(
+            90deg,
+            rgba(27, 81, 78, 0.8) 0%,
+            rgba(61, 183, 176, 0.8) 100%
+        );
+        color: white;
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .blog-header__content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .blog-header__title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .blog-header__description {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .blog-main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem 4rem;
+    }
+
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    .blog-empty {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3rem;
+        background-color: #f5f5f5;
+        border-radius: 15px;
+        font-size: 1.2rem;
+        color: #666;
+    }
+
+    @media (max-width: 1024px) {
+        .blog-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .blog-header__title {
+            font-size: 2.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .blog-header {
+            padding: 5rem 1.5rem 3rem;
+        }
+
+        .blog-header__title {
+            font-size: 2rem;
+        }
+
+        .blog-header__description {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .blog-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .blog-main {
+            padding: 0 1rem 3rem;
+        }
+    }
+</style>

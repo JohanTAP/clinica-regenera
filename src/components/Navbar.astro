@@ -1,14 +1,18 @@
 ---
-
+import { Image } from "astro:assets";
+import logo from "/public/assets/images/logo.webp";
 ---
 
 <nav class="navbar" aria-label="Menú de navegación principal">
   <div class="container">
     <a class="navbar__brand" href="/" aria-label="Inicio">
-      <img
-        src="/assets/images/logo.webp"
+      <Image
+        src={logo}
         alt="Logotipo de Clínica Regenera"
+        width={149}
+        height={48}
         class="navbar__logo"
+        format="webp"
       />
     </a>
     <button
@@ -23,23 +27,20 @@
     <div class="navbar__collapse" id="navbarMenu">
       <ul class="navbar__nav">
         <li class="navbar__item">
-          <a class="navbar__link smooth-scroll" href="#tratamientos"
+          <a class="navbar__link smooth-scroll" href="/#tratamientos"
             >Tratamientos</a
           >
         </li>
         <li class="navbar__item">
-          <a class="navbar__link smooth-scroll" href="#tu-cita">Tu cita</a>
+          <a class="navbar__link smooth-scroll" href="/#tu-cita">Tu cita</a>
         </li>
         <li class="navbar__item">
-          <a class="navbar__link smooth-scroll" href="#testimonio"
+          <a class="navbar__link smooth-scroll" href="/#testimonio"
             >Testimonios</a
           >
         </li>
         <li class="navbar__item">
-          <a
-            class="navbar__link smooth-scroll"
-            href="https://clinicaregenera.cl/blog/">Blog</a
-          >
+          <a class="navbar__link" href="/blog/">Blog</a>
         </li>
       </ul>
     </div>
