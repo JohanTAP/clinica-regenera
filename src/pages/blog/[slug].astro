@@ -6,6 +6,7 @@ import ButtonUp from "../../components/ButtonUp.astro";
 import { getCollection } from "astro:content";
 import { formatDate } from "../../utils/formatDate";
 import { marked } from "marked";
+import type { CollectionEntry } from "astro:content";
 
 // Genera las rutas para todas las entradas del blog
 export async function getStaticPaths() {
@@ -18,7 +19,7 @@ export async function getStaticPaths() {
 }
 
 // Obtiene la entrada específica del blog desde las props
-const { post } = Astro.props;
+const { post } = Astro.props as { post: CollectionEntry<"blog"> };
 const {
     title,
     description,
