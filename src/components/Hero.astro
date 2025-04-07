@@ -1,15 +1,23 @@
 ---
-
+import { Image } from "astro:assets";
+import logoBlanco from "/public/assets/images/logo-blanco.webp";
+import fondoImage from "/public/assets/images/fondo.webp";
 ---
 
-<section class="hero" aria-labelledby="hero-heading">
+<section
+  class="hero"
+  aria-labelledby="hero-heading"
+  style={`--bg-image: url(${fondoImage.src});`}
+>
   <div class="hero__image">
-    <img
-      src="/assets/images/logo-blanco.webp"
-      width="344"
-      height="326"
+    <Image
+      src={logoBlanco}
+      width={344}
+      height={326}
       alt="Logotipo de Clínica Regenera"
       class="hero__logo"
+      loading="eager"
+      format="webp"
     />
   </div>
   <div class="hero__texts">
@@ -46,7 +54,7 @@
         rgba(27, 81, 78, 0.8) 0%,
         rgba(61, 183, 176, 0.8) 100%
       ),
-      url("/assets/images/fondo.webp") no-repeat center center;
+      var(--bg-image) no-repeat center center;
     background-size: cover;
     display: flex;
     flex-direction: column;

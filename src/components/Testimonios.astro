@@ -1,5 +1,6 @@
 ---
-
+import { Image } from "astro:assets";
+import videoThumb from "/public/assets/images/video1-thumbnail.webp";
 ---
 
 <section
@@ -19,9 +20,18 @@
 
   <div class="carousel__videos">
     <div class="carousel__video">
-      <img src="/assets/images/video1-thumbnail.webp" alt="Testimonio 1" />
-      <button class="carousel__play-button">▶</button>
-      <video id="testimonio-video" class="hidden" controls>
+      <Image
+        src={videoThumb}
+        alt="Testimonio 1"
+        width={300}
+        height={500}
+        format="webp"
+        quality={80}
+      />
+      <button class="carousel__play-button" aria-label="Reproducir video"
+        >▶</button
+      >
+      <video id="testimonio-video" class="hidden" controls preload="none">
         <source src="/testimonio1.mp4" type="video/mp4" />
         Tu navegador no soporta la reproducción de videos.
       </video>

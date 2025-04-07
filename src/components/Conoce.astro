@@ -1,45 +1,62 @@
 ---
-
+import { Image } from "astro:assets";
+import videoThumb from "/public/assets/images/video-thumb.webp";
+import imgClinica from "/public/assets/images/clinica.webp";
+import imgFoto from "/public/assets/images/foto.webp";
+import imgFoto2 from "/public/assets/images/foto2.webp";
 ---
 
 <section class="servicios" id="tu-cita" aria-labelledby="servicios-heading">
   <h2 class="servicios__titulo">Bienvenido a Clínica Regenera</h2>
   <div class="servicios__contenedor servicios__contenedor--media">
     <div class="carousel__video media-card media-card--video">
-      <img
-        src="/assets/images/video-thumb.webp"
-        loading="lazy"
+      <Image
+        src={videoThumb}
         class="media-card__imagen"
         alt="Video de la Clínica"
-        width="342"
-        height="566"
+        width={342}
+        height={566}
+        loading="lazy"
+        format="webp"
+        quality={80}
       />
-      <button class="carousel__play-button">▶</button>
-      <video id="clinic-video" class="media-card__video hidden" controls>
+      <button class="carousel__play-button" aria-label="Reproducir video"
+        >▶</button
+      >
+      <video
+        id="clinic-video"
+        class="media-card__video hidden"
+        controls
+        preload="none"
+      >
         <source src="/video1.mp4" type="video/mp4" />
         Tu navegador no soporta la reproducción de videos.
       </video>
     </div>
     <div class="media-card media-card--image">
-      <img
-        src="/assets/images/clinica.webp"
-        loading="lazy"
+      <Image
+        src={imgClinica}
         class="media-card__imagen"
         alt="Imagen de la Clínica"
-        width="876"
-        height="566"
+        width={876}
+        height={566}
+        loading="lazy"
+        format="webp"
+        quality={80}
       />
     </div>
   </div>
   <div class="servicios__contenedor">
     <div class="servicio-card servicio-card--horizontal">
-      <img
-        src="/assets/images/foto.webp"
-        loading="lazy"
+      <Image
+        src={imgFoto}
         class="servicio-card__imagen"
         alt="Imagen de Cita"
-        width="342"
-        height="250"
+        width={342}
+        height={250}
+        loading="lazy"
+        format="webp"
+        quality={80}
       />
       <div class="servicio-card__contenido">
         <h3 class="servicio-card__titulo">Tu cita en Clínica Regenera</h3>
@@ -70,16 +87,21 @@
           (ALO) Chile.
         </li>
         <li>Certificado en Medicina Ortopédica Cyriax, del GCI Institute.</li>
-        <li>Master en Psiconeuroinmunologia clínica de la Universidad de Salamanca, España en curso</li>
+        <li>
+          Master en Psiconeuroinmunologia clínica de la Universidad de
+          Salamanca, España en curso
+        </li>
       </ul>
     </div>
-    <img
-      src="/assets/images/foto2.webp"
-      loading="lazy"
+    <Image
+      src={imgFoto2}
       class="servicio-card__imagen"
       alt="Imagen del Director"
-      width="342"
-      height="250"
+      width={342}
+      height={250}
+      loading="lazy"
+      format="webp"
+      quality={80}
     />
   </div>
 </section>

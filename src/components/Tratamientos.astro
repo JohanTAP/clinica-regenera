@@ -1,4 +1,57 @@
 ---
+import { Image } from "astro:assets";
+import imgQuiropraxia from "/public/assets/images/Quiropraxia.webp";
+import imgSuplementacion from "/public/assets/images/Suplementacion.webp";
+import imgOsteopatia from "/public/assets/images/Osteopatia.webp";
+import imgMedicina from "/public/assets/images/Medicina_ortopedica.webp";
+import imgBiohacking from "/public/assets/images/Biohacking.webp";
+import imgKinesiologia from "/public/assets/images/Kinesiologia.webp";
+import imgDeepLearning from "/public/assets/images/DeepLearning.webp";
+
+const tratamientos = [
+  {
+    imagen: imgQuiropraxia,
+    nombre: "Quiropraxia",
+    descripcion:
+      "Restablece el funcionamiento del sistema nervioso de nuestros usuarios.",
+  },
+  {
+    imagen: imgSuplementacion,
+    nombre: "Suplementación",
+    descripcion:
+      "Buscamos guiar a nuestros pacientes en el uso adecuado de suplementos.",
+  },
+  {
+    imagen: imgOsteopatia,
+    nombre: "Osteopatía",
+    descripcion:
+      "A través de manipulaciones osteopáticas buscamos devolver la movilidad normal de estas.",
+  },
+  {
+    imagen: imgMedicina,
+    nombre: "Medicina Ortopédica",
+    descripcion:
+      "Buscamos corregir disfunciones desde el punto de vista ortopédico.",
+  },
+  {
+    imagen: imgBiohacking,
+    nombre: "Biohacking y Hormesis",
+    descripcion:
+      "Buscamos la homeostasis (equilibrio) fisiológica y metabólica.",
+  },
+  {
+    imagen: imgKinesiologia,
+    nombre: "Kinesiología",
+    descripcion:
+      "Buscamos restablecer la funcionalidad y la calidad de vida de nuestros pacientes.",
+  },
+  {
+    imagen: imgDeepLearning,
+    nombre: "Deep Learning",
+    descripcion:
+      "La educación en salud es fundamental y es considerada un tratamiento de primera línea en nuestros pacientes.",
+  },
+];
 ---
 
 <section
@@ -8,114 +61,26 @@
 >
   <h2 class="tratamientos__titulo" id="tratamientos-heading">Tratamientos</h2>
   <div class="tratamientos__lista">
-    <div class="tratamientos__item">
-      <div class="tratamientos__icono">
-        <img
-          src="/assets/images/Quiropraxia.webp"
-          class="tratamientos__imagen"
-          alt="Quiropraxia"
-          width="252"
-          height="143"
-        />
-      </div>
-      <h3 class="tratamientos__nombre">Quiropraxia</h3>
-      <p class="tratamientos__descripcion">
-        Restablece el funcionamiento del sistema nervioso de nuestros usuarios.
-      </p>
-    </div>
-    <div class="tratamientos__item">
-      <div class="tratamientos__icono">
-        <img
-          src="/assets/images/Suplementacion.webp"
-          class="tratamientos__imagen"
-          alt="Suplementación"
-          width="252"
-          height="143"
-        />
-      </div>
-      <h3 class="tratamientos__nombre">Suplementación</h3>
-      <p class="tratamientos__descripcion">
-        Buscamos guiar a nuestros pacientes en el uso adecuado de suplementos.
-      </p>
-    </div>
-    <div class="tratamientos__item">
-      <div class="tratamientos__icono">
-        <img
-          src="/assets/images/Osteopatia.webp"
-          class="tratamientos__imagen"
-          alt="Osteopatía"
-          width="252"
-          height="143"
-        />
-      </div>
-      <h3 class="tratamientos__nombre">Osteopatía</h3>
-      <p class="tratamientos__descripcion">
-        A través de manipulaciones osteopáticas buscamos devolver la movilidad
-        normal de estas.
-      </p>
-    </div>
-    <div class="tratamientos__item">
-      <div class="tratamientos__icono">
-        <img
-          src="/assets/images/Medicina_ortopedica.webp"
-          class="tratamientos__imagen"
-          alt="Medicina Ortopédica"
-          width="252"
-          height="143"
-        />
-      </div>
-      <h3 class="tratamientos__nombre">Medicina Ortopédica</h3>
-      <p class="tratamientos__descripcion">
-        Buscamos corregir disfunciones desde el punto de vista ortopédico.
-      </p>
-    </div>
-    <div class="tratamientos__item">
-      <div class="tratamientos__icono">
-        <img
-          src="/assets/images/Biohacking.webp"
-          class="tratamientos__imagen"
-          alt="Biohacking y Hormesis"
-          width="252"
-          height="143"
-        />
-      </div>
-      <h3 class="tratamientos__nombre">Biohacking y Hormesis</h3>
-      <p class="tratamientos__descripcion">
-        Buscamos la homeostasis (equilibrio) fisiológica y metabólica.
-      </p>
-    </div>
-    <div class="tratamientos__item">
-      <div class="tratamientos__icono">
-        <img
-          src="/assets/images/Kinesiologia.webp"
-          class="tratamientos__imagen"
-          alt="Kinesiología"
-          width="252"
-          height="143"
-        />
-      </div>
-      <h3 class="tratamientos__nombre">Kinesiología</h3>
-      <p class="tratamientos__descripcion">
-        Buscamos restablecer la funcionalidad y la calidad de vida de nuestros
-        pacientes.
-      </p>
-    </div>
-    <div class="tratamientos__item">
-      <div class="tratamientos__icono">
-        <img
-          src="/assets/images/DeepLearning.webp"
-          class="tratamientos__imagen"
-          alt="Deep Learning"
-          width="252"
-          height="143"
-        />
-      </div>
-      <h3 class="tratamientos__nombre">Deep Learning</h3>
-      <p class="tratamientos__descripcion">
-        La educación en salud es fundamental y es considerada un tratamiento de
-        primera línea en nuestros pacientes.
-      </p>
-    </div>
+    {
+      tratamientos.map((tratamiento) => (
+        <div class="tratamientos__item">
+          <div class="tratamientos__icono">
+            <Image
+              src={tratamiento.imagen}
+              class="tratamientos__imagen"
+              alt={tratamiento.nombre}
+              width={252}
+              height={143}
+              loading="lazy"
+              format="webp"
+              quality={80}
+            />
+          </div>
+          <h3 class="tratamientos__nombre">{tratamiento.nombre}</h3>
+          <p class="tratamientos__descripcion">{tratamiento.descripcion}</p>
+        </div>
+      ))
+    }
   </div>
 </section>
 

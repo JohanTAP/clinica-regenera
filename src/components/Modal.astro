@@ -1,142 +1,176 @@
 ---
+
 ---
 
-<section id="modal" class="modal" aria-labelledby="modal-heading" aria-hidden="true">
+<section
+  id="modal"
+  class="modal"
+  aria-labelledby="modal-heading"
+  aria-hidden="true"
+>
   <div class="modal__content">
-    <button id="closeModal" class="modal__close-button" aria-label="Cerrar modal">X</button>
-    <img src="/assets/images/logo.webp" alt="Regenera Logo" class="modal__logo">
+    <button
+      id="closeModal"
+      class="modal__close-button"
+      aria-label="Cerrar modal">X</button
+    >
+    <img
+      src="/assets/images/logo.webp"
+      alt="Regenera Logo"
+      class="modal__logo"
+    />
     <h2 id="modal-heading">Vive una vida sin dolor</h2>
-    <button class="btn btn--agendar-online" onclick="window.open('https://clinicaregenera.site.agendapro.com/cl/sucursal/12194', '_blank')">AGENDAR ONLINE</button>
-    <button class="btn btn--agenda-whatsapp" onclick="window.open('https://api.whatsapp.com/send?phone=56954643631&text=Hola%2C+quiero+reservar+una+hora&type=phone_number&app_absent=0', '_blank')">AGENDA WHATSAPP</button>
-    <button class="btn btn--llamar" onclick="window.location.href='tel:+56954643631'">LLAMAR</button>
+    <button
+      class="btn btn--agendar-online"
+      onclick="window.open('https://clinicaregenera.site.agendapro.com/cl/sucursal/12194', '_blank')"
+      >AGENDAR ONLINE</button
+    >
+    <button
+      class="btn btn--agenda-whatsapp"
+      onclick="window.open('https://api.whatsapp.com/send?phone=56954643631&text=Hola%2C+quiero+reservar+una+hora&type=phone_number&app_absent=0', '_blank')"
+      >AGENDA WHATSAPP</button
+    >
+    <buttoan
+      class="btn btn--llamar"
+      onclick="window.location.href='tel:+56954643631'">LLAMAR</buttoan
+    >
     <p class="modal__horario">
-      Atención telefónica: <br><br>Lunes a viernes: 9:00 - 14:00 | 15:00 - 19:00 <br><br>Sábados: 9:00 - 14:00
+      Atención telefónica: <br /><br />Lunes a viernes: 9:00 - 14:00 | 15:00 -
+      19:00 <br /><br />Sábados: 9:00 - 14:00
     </p>
     <div class="modal__direccion">
-      <p>Encuentranos en: <br><br><a href="https://goo.gl/maps/rQZyb6HpedCJqAgh8" target="_blank" class="modal__direccion-link">Calle 30 Oriente N°1420 - Oficina N°620 - Edificio Plaza Oriente - Talca</a></p>
+      <p>
+        Encuentranos en: <br /><br /><a
+          href="https://goo.gl/maps/rQZyb6HpedCJqAgh8"
+          target="_blank"
+          class="modal__direccion-link"
+          >Calle 30 Oriente N°1420 - Oficina N°620 - Edificio Plaza Oriente -
+          Talca</a>
+      </p>
     </div>
   </div>
 </section>
-  
+
 <style>
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
 
-.modal__content {
-  background-color: #333;
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
-  color: white;
-  width: 300px;
-  position: relative;
-}
+  .modal__content {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    width: 300px;
+    position: relative;
+  }
 
-.modal__logo {
-  width: 130px;
-  margin-bottom: 20px;
-}
+  .modal__logo {
+    width: 130px;
+    margin-bottom: 20px;
+  }
 
-.btn {
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: block;
-  width: 100%;
-  margin-top: 10px;
-}
+  .btn {
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+  }
 
-.btn--agendar-online {
-  background-color: #F6C61B;
-}
+  .btn--agendar-online {
+    background-color: #f6c61b;
+  }
 
-.btn--agendar-online:hover {
-  background-color: #D5A517;
-}
+  .btn--agendar-online:hover {
+    background-color: #d5a517;
+  }
 
-.btn--agenda-whatsapp {
-  background-color: #25D366;
-}
+  .btn--agenda-whatsapp {
+    background-color: #25d366;
+  }
 
-.btn--agenda-whatsapp:hover {
-  background-color: #1EBE5C;
-}
+  .btn--agenda-whatsapp:hover {
+    background-color: #1ebe5c;
+  }
 
-.btn--llamar {
-  background-color: #007BFF;
-}
+  .btn--llamar {
+    background-color: #007bff;
+  }
 
-.btn--llamar:hover {
-  background-color: #0069D9;
-}
+  .btn--llamar:hover {
+    background-color: #0069d9;
+  }
 
-.modal__close-button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 20px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
+  .modal__close-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
 
-.modal__horario {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #777;
-}
+  .modal__horario {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #777;
+  }
 
-.modal__direccion {
-  color: #777;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-}
+  .modal__direccion {
+    color: #777;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
 
-.modal__direccion-link {
-  color: #777;
-  text-decoration: none;
-  position: relative;
-  transition: color 0.3s ease;
-}
+  .modal__direccion-link {
+    color: #777;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+  }
 
-.modal__direccion-link::after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  display: block;
-  margin-top: 5px;
-  right: 0;
-  background: #3DB7B0;
-  transition: width 0.4s ease;
-}
+  .modal__direccion-link::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #3db7b0;
+    transition: width 0.4s ease;
+  }
 
-.modal__direccion-link:hover::after,
-.modal__direccion-link:focus::after {
-  width: 100%;
-  left: 0;
-  background: #3DB7B0;
-}
+  .modal__direccion-link:hover::after,
+  .modal__direccion-link:focus::after {
+    width: 100%;
+    left: 0;
+    background: #3db7b0;
+  }
 
-.modal__direccion-link:hover,
-.modal__direccion-link:focus {
-  color: #3DB7B0;
-}
-</style>  
+  .modal__direccion-link:hover,
+  .modal__direccion-link:focus {
+    color: #3db7b0;
+  }
+</style>
+
