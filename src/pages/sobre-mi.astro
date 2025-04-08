@@ -1,0 +1,106 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import ButtonUp from "../components/ButtonUp.astro";
+---
+
+<Layout title="Sobre mí | Clínica Regenera">
+  <Navbar />
+  <div class="scroll-container" id="scroll-container">
+    <header class="sobre-mi-header">
+      <div class="sobre-mi-header__content">
+        <h1>Sobre mí</h1>
+        <p>Kinesiología, Cirugía Ortopédica y Medicina Osteopática</p>
+      </div>
+    </header>
+
+    <main class="sobre-mi-main">
+      <section class="historia">
+        <h2>Historia</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula
+          nibh, interdum non enim sit amet, luctus aliquet nisl. Aliquam at erat
+          turpis. Vivamus congue odio eget aliquam hendrerit. Suspendisse
+          potenti.
+        </p>
+      </section>
+
+      <section class="instagram">
+        <h2>Instagram</h2>
+        <div class="instagram-grid">
+          <div class="instagram-item"></div>
+          <div class="instagram-item"></div>
+          <div class="instagram-item"></div>
+          <div class="instagram-item"></div>
+          <div class="instagram-item"></div>
+          <div class="instagram-item"></div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+    <ButtonUp />
+  </div>
+</Layout>
+
+<style>
+  .sobre-mi-header {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("/assets/images/sobre-mi-header.jpg") no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 4rem 1rem;
+  }
+
+  .sobre-mi-header__content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .sobre-mi-header__content p {
+    font-size: 1.2rem;
+  }
+
+  .sobre-mi-main {
+    padding: 2rem 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .historia h2,
+  .instagram h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #3db7b0;
+  }
+
+  .historia p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .instagram-item {
+    background-color: #e6e6e6;
+    height: 150px;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .sobre-mi-header__content h1 {
+      font-size: 2rem;
+    }
+
+    .sobre-mi-header__content p {
+      font-size: 1rem;
+    }
+  }
+</style>
