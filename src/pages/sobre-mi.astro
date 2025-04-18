@@ -3,6 +3,15 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import ButtonUp from "../components/ButtonUp.astro";
+import { Image } from "astro:assets"; // Importar Image
+
+// Importar las imágenes de Instagram
+import imgInsta1 from "/public/assets/images/1.jpeg";
+import imgInsta2 from "/public/assets/images/2.jpeg";
+import imgInsta3 from "/public/assets/images/3.jpeg";
+import imgInsta4 from "/public/assets/images/4.webp"; // Added
+import imgInsta5 from "/public/assets/images/5.jpg"; // Added
+import imgInsta6 from "/public/assets/images/6.jpg"; // Added
 ---
 
 <Layout title="Sobre mí | Clínica Regenera">
@@ -11,33 +20,169 @@ import ButtonUp from "../components/ButtonUp.astro";
     <header class="sobre-mi-header">
       <div class="sobre-mi-header__content">
         <h1>Sobre mí</h1>
-        <p>Kinesiología, Cirugía Ortopédica y Medicina Osteopática</p>
+        <p>Kinesiología, Quiropraxia, Osteopatía y Medicina Ortopédica</p>
       </div>
     </header>
 
-    <main class="sobre-mi-main">
-      <section class="historia">
-        <h2>Historia</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula
-          nibh, interdum non enim sit amet, luctus aliquet nisl. Aliquam at erat
-          turpis. Vivamus congue odio eget aliquam hendrerit. Suspendisse
-          potenti.
-        </p>
-      </section>
+    <div class="main-background-wrapper">
+      <main class="sobre-mi-main">
+        <section class="historia">
+          <h2>Historia</h2>
+          <div class="historia-content">
+            <div class="historia-texto">
+              <p>
+                Clínica Regenera <b>nace en Agosto del año 2020</b>, con el
+                objetivo de entregar una atención a pacientes con dolor subagudo
+                y crónico de forma diferente a la tradicional, es decir no
+                poniendo el enfoque en los síntomas si no que en la causa y en
+                los factores que perpetúan o que cronifican el dolor. Esta
+                necesidad nace de ver la constante disconformidad de los
+                usuarios siendo sometidos a diferentes terapias, tratamientos
+                farmacológicos, inyecciones, cirugías, y otros tratamientos
+                invasivos sin ver solucion a su problema de salud. En ese
+                sentido Clínica Regenera a través de su modelo de atención busca
+                investigar y profundizar en los trastornos neuroendocrinos e
+                inmunológicos que están detrás de la inflamación crónica y que
+                impiden el proceso natural de regeneración celular, tratando de
+                esta manera el dolor crónico así como también trastornos del
+                sistema nervioso, trastornos del sueño y también del sistema
+                digestivo.
+              </p>
+              <p>
+                Dentro de las herramientas que se utilizan en la clínica están:
+                la quiropráctica, la osteopatía, la medicina ortopédica, la
+                Psiconeuroinmunología clínica, el biohacking, el deep learning y
+                la suplementacion, serán nuestros kinesiólogos los que te
+                embarcarán en esta aventura donde los hábitos y el estilo de
+                vida son fundamentales para lograr un verdadero cambio en la
+                salud.
+              </p>
+            </div>
+            <img
+              src="/assets/images/certificado.png"
+              alt="Certificado Osteopathic College of Ontario"
+              class="certificado-img"
+            />
+          </div>
+        </section>
+      </main>
+    </div>
 
+    <div class="instagram-background-wrapper">
       <section class="instagram">
         <h2>Instagram</h2>
         <div class="instagram-grid">
-          <div class="instagram-item"></div>
-          <div class="instagram-item"></div>
-          <div class="instagram-item"></div>
-          <div class="instagram-item"></div>
-          <div class="instagram-item"></div>
-          <div class="instagram-item"></div>
+          <!-- Post 1 -->
+          <a
+            href="https://www.instagram.com/osteopata.edus/p/DBH0mAgu8ru/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="instagram-link"
+          >
+            <Image
+              src={imgInsta1}
+              alt="Post de Instagram 1"
+              width={374}
+              height={374}
+              format="webp"
+              quality={80}
+              loading="lazy"
+              class="instagram-image"
+            />
+          </a>
+          <!-- Post 2 -->
+          <a
+            href="https://www.instagram.com/clinicaregenera.cl/p/C66tUm_ON07/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="instagram-link"
+          >
+            <Image
+              src={imgInsta2}
+              alt="Post de Instagram 2"
+              width={374}
+              height={374}
+              format="webp"
+              quality={80}
+              loading="lazy"
+              class="instagram-image"
+            />
+          </a>
+          <!-- Post 3 -->
+          <a
+            href="https://www.instagram.com/clinicaregenera.cl/p/C6eeeh-OAky/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="instagram-link"
+          >
+            <Image
+              src={imgInsta3}
+              alt="Post de Instagram 3"
+              width={374}
+              height={374}
+              format="webp"
+              quality={80}
+              loading="lazy"
+              class="instagram-image"
+            />
+          </a>
+          <!-- Post 4 -->
+          <a
+            href="https://www.instagram.com/clinicaregenera.cl/p/DIR40K9S8tn/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="instagram-link"
+          >
+            <Image
+              src={imgInsta4}
+              alt="Post de Instagram 4"
+              width={374}
+              height={374}
+              format="webp"
+              quality={80}
+              loading="lazy"
+              class="instagram-image"
+            />
+          </a>
+          <!-- Post 5 -->
+          <a
+            href="https://www.instagram.com/clinicaregenera.cl/p/DIPzYy_uEqa/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="instagram-link"
+          >
+            <Image
+              src={imgInsta5}
+              alt="Post de Instagram 5"
+              width={374}
+              height={374}
+              format="webp"
+              quality={80}
+              loading="lazy"
+              class="instagram-image"
+            />
+          </a>
+          <!-- Post 6 -->
+          <a
+            href="https://www.instagram.com/osteopata.edus/reel/DINNXHcu4Gb/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="instagram-link"
+          >
+            <Image
+              src={imgInsta6}
+              alt="Post de Instagram 6"
+              width={374}
+              height={374}
+              format="webp"
+              quality={80}
+              loading="lazy"
+              class="instagram-image"
+            />
+          </a>
         </div>
       </section>
-    </main>
+    </div>
 
     <Footer />
     <ButtonUp />
@@ -46,9 +191,7 @@ import ButtonUp from "../components/ButtonUp.astro";
 
 <style>
   .sobre-mi-header {
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url("/assets/images/sobre-mi-header.jpg") no-repeat center center/cover;
+    background: linear-gradient(135deg, #3db7b0, #235d5a);
     color: white;
     text-align: center;
     padding: 4rem 1rem;
@@ -63,8 +206,13 @@ import ButtonUp from "../components/ButtonUp.astro";
     font-size: 1.2rem;
   }
 
+  .main-background-wrapper {
+    background-color: #3db7b017;
+    padding: 2rem 0; /* Apply vertical padding here */
+  }
+
   .sobre-mi-main {
-    padding: 2rem 1rem;
+    padding: 0 1rem; /* Keep horizontal padding */
     max-width: 900px;
     margin: 0 auto;
   }
@@ -73,7 +221,8 @@ import ButtonUp from "../components/ButtonUp.astro";
   .instagram h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #3db7b0;
+    color: #494949;
+    text-align: center; /* Added */
   }
 
   .historia p {
@@ -82,15 +231,64 @@ import ButtonUp from "../components/ButtonUp.astro";
     color: #555;
   }
 
-  .instagram-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  .historia-content {
+    display: flex;
+    align-items: flex-start; /* Changed from stretch to flex-start */
     gap: 1rem;
   }
 
+  .certificado-img {
+    max-width: 450px; /* Increased from 400px */
+    object-fit: contain; /* Changed from cover to contain */
+    border-radius: 8px;
+    margin-top: 16px; /* Added */
+  }
+
+  .instagram-background-wrapper {
+    /* Added rule for wrapper */
+    background-color: #f1f9f9;
+    background-image: radial-gradient(#3db7b033 1px, transparent 1px);
+    background-size: 15px 15px;
+    padding: 3rem 0; /* Apply vertical padding here */
+  }
+
+  .instagram {
+    padding: 0 1.5rem; /* Keep horizontal padding */
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Changed to 3 columns */
+    gap: 1rem;
+  }
+
+  .instagram-link {
+    display: block;
+    overflow: hidden; /* Para contener el efecto de escala */
+    border-radius: 8px;
+    aspect-ratio: 1 / 1; /* Mantiene la forma cuadrada */
+    position: relative; /* Para posibles overlays futuros */
+  }
+
+  .instagram-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el área */
+    transition: transform 0.3s ease; /* Transición suave para el hover */
+    display: block; /* Evita espacio extra debajo de la imagen */
+  }
+
+  .instagram-link:hover .instagram-image {
+    transform: scale(1.05); /* Efecto de zoom suave al pasar el mouse */
+  }
+
+  /* Estilo para los placeholders restantes */
   .instagram-item {
     background-color: #e6e6e6;
-    height: 150px;
+    height: auto; /* La altura se define por aspect-ratio en el grid */
+    aspect-ratio: 1 / 1; /* Mantiene la forma cuadrada */
     border-radius: 8px;
   }
 
@@ -101,6 +299,21 @@ import ButtonUp from "../components/ButtonUp.astro";
 
     .sobre-mi-header__content p {
       font-size: 1rem;
+    }
+
+    .historia-content {
+      flex-direction: column;
+    }
+
+    .certificado-img {
+      max-width: 100%;
+    }
+
+    .instagram-grid {
+      grid-template-columns: repeat(
+        2,
+        1fr
+      ); /* Ajustar a 2 columnas en móvil si se desea */
     }
   }
 </style>
