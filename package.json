@@ -1,7 +1,7 @@
 {
   "name": "clinica-regenera",
   "type": "module",
-  "version": "0.3.33",
+  "version": "0.4.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

@@ -9,10 +9,12 @@ interface Props {
 const { post } = Astro.props;
 const { title, description, pubDate, image, author, authorImage } = post.data;
 
-// Crear URLs absolutas para las imágenes
-const imageUrl = new URL(image, Astro.url.origin).href;
+// Mejorar la gestión de rutas para que funcione tanto en local como en Vercel
+const imageUrl = image.startsWith("/") ? image : `/${image}`;
 const authorImageUrl = authorImage
-    ? new URL(authorImage, Astro.url.origin).href
+    ? authorImage.startsWith("/")
+        ? authorImage
+        : `/${authorImage}`
     : "";
 ---
 

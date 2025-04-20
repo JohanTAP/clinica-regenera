@@ -159,20 +159,38 @@ import logo from "/public/assets/images/logo.webp";
       display: none;
       flex-direction: column;
       width: 100%;
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba(
+        0,
+        0,
+        0,
+        0.8
+      ); /* Fondo más oscuro para mejor visibilidad */
       position: absolute;
       top: 100%;
       left: 0;
+      z-index: 1000; /* Asegurarse que aparezca sobre otros elementos */
+      padding: 1rem 0; /* Añadir espacio vertical */
     }
 
     .navbar__collapse.show {
       display: flex;
     }
 
+    .navbar__nav {
+      flex-direction: column; /* Organiza los elementos en columna */
+      width: 100%;
+    }
+
     .navbar__item {
       margin: 0;
       text-align: center;
-      padding: 1rem;
+      padding: 0.75rem;
+      width: 100%; /* Ocupa todo el ancho disponible */
+    }
+
+    .navbar__link {
+      display: block;
+      padding: 0.5rem;
     }
   }
 </style>
