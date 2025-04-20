@@ -8,40 +8,61 @@ import ButtonUp from "../../components/ButtonUp.astro";
 import type { Page } from "astro";
 
 // Obtenemos los posts para la primera página
-export async function getStaticProps() {
+export async function getStaticPaths() {
     const posts = await getCollection("blog");
     const sortedPosts = posts.sort(
         (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
     );
 
-    // Creamos manualmente un objeto similar a "page" con los primeros 2 posts (igual que pageSize en [page].astro)
+    // Usamos los primeros 2 posts (igual que pageSize en [page].astro)
     const pageSize = 2;
     const totalPosts = sortedPosts.length;
     const totalPages = Math.ceil(totalPosts / pageSize);
-
-    const page = {
-        data: sortedPosts.slice(0, pageSize),
-        start: 0,
-        end: pageSize - 1,
-        size: pageSize,
-        total: totalPosts,
-        currentPage: 1,
-        lastPage: totalPages,
-        url: {
-            current: "/blog",
-            prev: undefined,
-            next: totalPages > 1 ? "/blog/2" : undefined,
-        },
-    };
-
-    return { page };
+    
+    return [{
+        props: {
+            page: {
+                data: sortedPosts.slice(0, pageSize),
+                start: 0,
+                end: pageSize - 1,
+                size: pageSize,
+                total: totalPosts,
+                currentPage: 1,
+                lastPage: totalPages,
+                url: {
+                    current: "/blog",
+                    prev: undefined,
+                    next: totalPages > 1 ? "/blog/2" : undefined
+                }
+            }
+        }
+    }];
 }
 
-const { page } = Astro.props;
+// Define el tipo esperado para las props
+type Props = { 
+    page: {
+        data: CollectionEntry<"blog">[];
+        start: number;
+        end: number;
+        size: number;
+        total: number;
+        currentPage: number;
+        lastPage: number;
+        url: {
+            current: string;
+            prev: string | undefined;
+            next: string | undefined;
+        };
+    }
+};
+
+// Accede a los datos de la página actual a través de Astro.props
+const { page } = Astro.props as Props;
 
 // Variables para el diseño de la página
 const title = `Blog | Clínica Regenera`;
-const description =
+const description = 
     "Artículos e información sobre salud, bienestar, quiropraxia, kinesiología, osteopatía y más.";
 ---
 
