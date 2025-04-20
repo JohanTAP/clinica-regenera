@@ -15,17 +15,9 @@ import logo from "/public/assets/images/logo.webp";
         format="webp"
       />
     </a>
-    <button
-      class="navbar__toggler"
-      id="navbarToggler"
-      aria-label="Abrir menú de navegación"
-      type="button"
-    >
-      <span class="navbar__toggler-icon"></span>
-      <span class="navbar__toggler-icon"></span>
-      <span class="navbar__toggler-icon"></span>
-    </button>
-    <div class="navbar__collapse" id="navbarMenu">
+
+    <!-- Menú de escritorio - siempre visible en pantallas grandes -->
+    <div class="desktop-menu">
       <ul class="navbar__nav">
         <li class="navbar__item">
           <a class="navbar__link smooth-scroll" href="/#tratamientos"
@@ -51,8 +43,110 @@ import logo from "/public/assets/images/logo.webp";
         </li>
       </ul>
     </div>
+
+    <!-- Botón hamburguesa - solo visible en móvil -->
+    <button
+      class="navbar__toggler"
+      id="navbarToggler"
+      aria-label="Abrir menú de navegación"
+      type="button"
+    >
+      <span class="navbar__toggler-icon"></span>
+      <span class="navbar__toggler-icon"></span>
+      <span class="navbar__toggler-icon"></span>
+    </button>
+  </div>
+
+  <!-- Menú móvil separado - oculto por defecto -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu__nav">
+      <li class="mobile-menu__item">
+        <a class="mobile-menu__link smooth-scroll" href="/#tratamientos"
+          >Tratamientos</a
+        >
+      </li>
+      <li class="mobile-menu__item">
+        <a class="mobile-menu__link smooth-scroll" href="/#tu-cita">Tu cita</a>
+      </li>
+      <li class="mobile-menu__item">
+        <a class="mobile-menu__link smooth-scroll" href="/#testimonio"
+          >Testimonios</a
+        >
+      </li>
+      <li class="mobile-menu__item">
+        <a class="mobile-menu__link" href="/sobre-mi">Sobre mí</a>
+      </li>
+      <li class="mobile-menu__item">
+        <a class="mobile-menu__link" href="/contacto">Contacto</a>
+      </li>
+      <li class="mobile-menu__item">
+        <a class="mobile-menu__link" href="/blog/">Blog</a>
+      </li>
+    </ul>
   </div>
 </nav>
+
+<script is:inline>
+  // Usamos una variable para evitar duplicar los manejadores de eventos
+  let menuInitialized = false;
+
+  function setupMobileMenu() {
+    // Si ya inicializamos el menú, no hacemos nada
+    if (menuInitialized) {
+      return;
+    }
+
+    const toggler = document.getElementById("navbarToggler");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (toggler && mobileMenu) {
+      // Maneja el clic en el botón hamburguesa
+      toggler.addEventListener("click", function (e) {
+        e.preventDefault(); // Prevenir cualquier comportamiento predeterminado
+        e.stopPropagation(); // Detener la propagación del evento
+
+        const isOpen = mobileMenu.classList.contains("open");
+
+        if (isOpen) {
+          mobileMenu.classList.remove("open");
+        } else {
+          mobileMenu.classList.add("open");
+        }
+      });
+
+      // Cierra el menú al hacer clic en los enlaces
+      const mobileLinks = mobileMenu.querySelectorAll(".mobile-menu__link");
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          mobileMenu.classList.remove("open");
+        });
+      });
+
+      // Cierra el menú al hacer clic fuera de él
+      document.addEventListener("click", function (e) {
+        if (
+          mobileMenu.classList.contains("open") &&
+          !mobileMenu.contains(e.target) &&
+          !toggler.contains(e.target)
+        ) {
+          mobileMenu.classList.remove("open");
+        }
+      });
+
+      // Marcar como inicializado para evitar duplicar eventos
+      menuInitialized = true;
+    }
+  }
+
+  // Eventos de inicialización
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupMobileMenu);
+  } else {
+    setupMobileMenu();
+  }
+
+  document.addEventListener("astro:page-load", setupMobileMenu);
+</script>
 
 <style>
   .navbar {
@@ -61,9 +155,6 @@ import logo from "/public/assets/images/logo.webp";
     left: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     z-index: 1000;
   }
 
@@ -82,24 +173,8 @@ import logo from "/public/assets/images/logo.webp";
     height: 48px;
   }
 
-  .navbar__toggler {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: none;
-    position: relative;
-    z-index: 1100;
-  }
-
-  .navbar__toggler-icon {
-    width: 30px;
-    height: 2px;
-    background-color: #fff;
-    display: block;
-    margin: 6px 0;
-  }
-
-  .navbar__collapse {
+  /* Estilos para el menú de escritorio */
+  .desktop-menu {
     display: flex;
     align-items: center;
   }
@@ -151,63 +226,85 @@ import logo from "/public/assets/images/logo.webp";
     background: #3db7b0;
   }
 
+  /* Estilos para el botón hamburguesa */
+  .navbar__toggler {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: none;
+    position: relative;
+    z-index: 1100;
+    padding: 8px;
+  }
+
+  .navbar__toggler-icon {
+    width: 30px;
+    height: 2px;
+    background-color: #fff;
+    display: block;
+    margin: 6px 0;
+    transition: transform 0.3s ease;
+  }
+
+  /* Estilos para el menú móvil */
+  .mobile-menu {
+    display: none;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.1); /* Mismo color que el navbar */
+    padding: 1rem 0;
+    backdrop-filter: blur(
+      8px
+    ); /* Efecto de desenfoque para mejor legibilidad */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1090;
+  }
+
+  .mobile-menu.open {
+    display: block;
+  }
+
+  .mobile-menu__nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-menu__item {
+    text-align: center;
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-menu__item:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-menu__link {
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 16px;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .mobile-menu__link:hover,
+  .mobile-menu__link:focus {
+    color: #3db7b0;
+  }
+
+  /* Estilos responsive */
   @media (max-width: 768px) {
+    .desktop-menu {
+      display: none;
+    }
+
     .navbar__toggler {
       display: block;
-      cursor: pointer;
-      z-index: 1100;
-      padding: 8px;
-      background: transparent;
-      border: none;
-    }
-
-    .navbar__collapse {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      background-color: rgba(
-        0,
-        0,
-        0,
-        0.9
-      ); /* Fondo más oscuro para mejor visibilidad */
-      position: absolute;
-      top: 100%;
-      left: 0;
-      z-index: 1090; /* Alto z-index para aparecer sobre otros elementos */
-      padding: 1rem 0; /* Añadir espacio vertical */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    }
-
-    /* Importante: Esta clase es la que hace que el menú se muestre cuando se agrega vía JavaScript */
-    .navbar__collapse.show {
-      display: flex !important; /* Usar !important para forzar el display:flex */
-    }
-
-    .navbar__nav {
-      flex-direction: column; /* Organiza los elementos en columna */
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    .navbar__item {
-      margin: 0;
-      text-align: center;
-      padding: 0.75rem;
-      width: 100%; /* Ocupa todo el ancho disponible */
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
-    }
-
-    .navbar__item:last-child {
-      border-bottom: none; /* Elimina el borde del último elemento */
-    }
-
-    .navbar__link {
-      display: block;
-      padding: 0.5rem;
-      width: 100%;
-      font-size: 16px; /* Texto más grande para mejor tap target */
     }
   }
 </style>

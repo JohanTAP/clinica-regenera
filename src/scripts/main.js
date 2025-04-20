@@ -1,38 +1,7 @@
 // Archivo principal de JavaScript para Clínica Regenera
 
-// Funcionalidad del menú de navegación
-function setupNavbar() {
-  const navbarToggler = document.getElementById('navbarToggler');
-  const navbarMenu = document.getElementById('navbarMenu');
-
-  if (navbarToggler && navbarMenu) {
-    // Asegurarse de que el evento click se maneje correctamente
-    navbarToggler.addEventListener('click', function (e) {
-      e.preventDefault(); // Prevenir comportamiento por defecto
-      navbarMenu.classList.toggle('show');
-      console.log('Toggle clicked, menu has class show:', navbarMenu.classList.contains('show')); // Log para depuración
-    });
-
-    // Cerrar el menú al hacer click en enlaces
-    const navLinks = navbarMenu.querySelectorAll('.navbar__link');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        // Solo cerrar en modo móvil (cuando toggler es visible)
-        if (window.getComputedStyle(navbarToggler).display !== 'none') {
-          navbarMenu.classList.remove('show');
-        }
-      });
-    });
-
-    // Cerrar el menú al hacer click fuera de él
-    document.addEventListener('click', function (event) {
-      const isClickInsideNavbar = navbarMenu.contains(event.target) || navbarToggler.contains(event.target);
-      if (!isClickInsideNavbar && navbarMenu.classList.contains('show')) {
-        navbarMenu.classList.remove('show');
-      }
-    });
-  }
-}
+// ⚠️ La funcionalidad del menú de navegación ahora está implementada directamente en Navbar.astro
+// para evitar conflictos de manejadores de eventos
 
 // Funcionalidad de desplazamiento suave
 function setupSmoothScroll() {
@@ -125,8 +94,8 @@ function setupVideoPlayback() {
 
 // Inicializar todas las funcionalidades cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM fully loaded, initializing navigation...'); // Log para depuración
-  setupNavbar();
+  console.log('DOM fully loaded, initializing components...');
+  // setupNavbar(); // Comentado para evitar conflictos con Navbar.astro
   setupSmoothScroll();
   setupModal();
   setupVideoPlayback();
@@ -134,8 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // También aseguramos la inicialización para Astro View Transitions
 document.addEventListener('astro:page-load', () => {
-  console.log('Astro page loaded, initializing navigation...'); // Log para depuración
-  setupNavbar();
+  console.log('Astro page loaded, initializing components...');
+  // setupNavbar(); // Comentado para evitar conflictos con Navbar.astro
   setupSmoothScroll();
   setupModal();
   setupVideoPlayback();
