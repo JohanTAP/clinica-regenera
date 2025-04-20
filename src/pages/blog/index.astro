@@ -1,37 +1,24 @@
 ---
-// Redirige a la primera página del blog pero hace que el contenido se muestre directamente
-// sin redirecciones visibles para el usuario.
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import BlogCard from "../../components/blog/BlogCard.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import ButtonUp from "../../components/ButtonUp.astro";
-import type { Page } from "astro";
 
-// Usamos getStaticPaths igual que en [page].astro
-export async function getStaticPaths({ paginate }) {
-    const posts = await getCollection("blog");
-    const sortedPosts = posts.sort(
-        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-    );
+// Obtener directamente los posts para la primera página
+const posts = await getCollection("blog");
+const sortedPosts = posts.sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 
-    // Generamos una página única (equivalente a la primera página)
-    // que se mostrará en la ruta /blog
-    return [
-        // Creamos la página que será /blog (index)
-        paginate(sortedPosts, { pageSize: 2, params: { page: undefined } }),
-    ];
-}
-
-// Define el tipo esperado para las props - igual que en [page].astro
-type Props = { page: Page<CollectionEntry<"blog">> };
-
-// Acceso a los datos de la página
-const { page } = Astro.props as Props;
+// Usar los primeros 2 posts (igual que pageSize en [page].astro)
+const pageSize = 2;
+const postsToShow = sortedPosts.slice(0, pageSize);
+const totalPages = Math.ceil(posts.length / pageSize);
 
 // Variables para el diseño de la página
-const title = `Blog | Clínica Regenera`;
+const title = "Blog | Clínica Regenera";
 const description =
     "Artículos e información sobre salud, bienestar, quiropraxia, kinesiología, osteopatía y más.";
 ---
@@ -51,8 +38,8 @@ const description =
             <main class="blog-main">
                 <div class="blog-grid">
                     {
-                        page.data.length > 0 ? (
-                            page.data.map((post) => (
+                        postsToShow.length > 0 ? (
+                            postsToShow.map((post) => (
                                 <div class="blog-grid__item">
                                     <BlogCard post={post} />
                                 </div>
@@ -65,33 +52,19 @@ const description =
                     }
                 </div>
 
-                <!-- Controles de paginación -->
+                <!-- Controles de paginación simplificados -->
                 <nav class="pagination-nav" aria-label="Navegación del blog">
-                    {
-                        page.url.prev ? (
-                            <a
-                                href={page.url.prev}
-                                class="pagination-link prev"
-                            >
-                                &larr; Anteriores
-                            </a>
-                        ) : (
-                            <span class="pagination-link disabled">
-                                &larr; Anteriores
-                            </span>
-                        )
-                    }
+                    <span class="pagination-link disabled"
+                        >&larr; Anteriores</span
+                    >
 
                     <span class="page-indicator">
-                        Página {page.currentPage} de {page.lastPage}
+                        Página 1 de {totalPages}
                     </span>
 
                     {
-                        page.url.next ? (
-                            <a
-                                href={page.url.next}
-                                class="pagination-link next"
-                            >
+                        totalPages > 1 ? (
+                            <a href="/blog/2" class="pagination-link next">
                                 Siguientes &rarr;
                             </a>
                         ) : (
