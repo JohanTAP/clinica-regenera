@@ -6,8 +6,30 @@ function setupNavbar() {
   const navbarMenu = document.getElementById('navbarMenu');
 
   if (navbarToggler && navbarMenu) {
-    navbarToggler.addEventListener('click', () => {
+    // Asegurarse de que el evento click se maneje correctamente
+    navbarToggler.addEventListener('click', function (e) {
+      e.preventDefault(); // Prevenir comportamiento por defecto
       navbarMenu.classList.toggle('show');
+      console.log('Toggle clicked, menu has class show:', navbarMenu.classList.contains('show')); // Log para depuración
+    });
+
+    // Cerrar el menú al hacer click en enlaces
+    const navLinks = navbarMenu.querySelectorAll('.navbar__link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        // Solo cerrar en modo móvil (cuando toggler es visible)
+        if (window.getComputedStyle(navbarToggler).display !== 'none') {
+          navbarMenu.classList.remove('show');
+        }
+      });
+    });
+
+    // Cerrar el menú al hacer click fuera de él
+    document.addEventListener('click', function (event) {
+      const isClickInsideNavbar = navbarMenu.contains(event.target) || navbarToggler.contains(event.target);
+      if (!isClickInsideNavbar && navbarMenu.classList.contains('show')) {
+        navbarMenu.classList.remove('show');
+      }
     });
   }
 }
@@ -103,6 +125,16 @@ function setupVideoPlayback() {
 
 // Inicializar todas las funcionalidades cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM fully loaded, initializing navigation...'); // Log para depuración
+  setupNavbar();
+  setupSmoothScroll();
+  setupModal();
+  setupVideoPlayback();
+});
+
+// También aseguramos la inicialización para Astro View Transitions
+document.addEventListener('astro:page-load', () => {
+  console.log('Astro page loaded, initializing navigation...'); // Log para depuración
   setupNavbar();
   setupSmoothScroll();
   setupModal();

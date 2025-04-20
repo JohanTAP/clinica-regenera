@@ -19,6 +19,7 @@ import logo from "/public/assets/images/logo.webp";
       class="navbar__toggler"
       id="navbarToggler"
       aria-label="Abrir menú de navegación"
+      type="button"
     >
       <span class="navbar__toggler-icon"></span>
       <span class="navbar__toggler-icon"></span>
@@ -153,6 +154,11 @@ import logo from "/public/assets/images/logo.webp";
   @media (max-width: 768px) {
     .navbar__toggler {
       display: block;
+      cursor: pointer;
+      z-index: 1100;
+      padding: 8px;
+      background: transparent;
+      border: none;
     }
 
     .navbar__collapse {
@@ -163,22 +169,26 @@ import logo from "/public/assets/images/logo.webp";
         0,
         0,
         0,
-        0.8
+        0.9
       ); /* Fondo más oscuro para mejor visibilidad */
       position: absolute;
       top: 100%;
       left: 0;
-      z-index: 1000; /* Asegurarse que aparezca sobre otros elementos */
+      z-index: 1090; /* Alto z-index para aparecer sobre otros elementos */
       padding: 1rem 0; /* Añadir espacio vertical */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
     }
 
+    /* Importante: Esta clase es la que hace que el menú se muestre cuando se agrega vía JavaScript */
     .navbar__collapse.show {
-      display: flex;
+      display: flex !important; /* Usar !important para forzar el display:flex */
     }
 
     .navbar__nav {
       flex-direction: column; /* Organiza los elementos en columna */
       width: 100%;
+      margin: 0;
+      padding: 0;
     }
 
     .navbar__item {
@@ -186,11 +196,18 @@ import logo from "/public/assets/images/logo.webp";
       text-align: center;
       padding: 0.75rem;
       width: 100%; /* Ocupa todo el ancho disponible */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
+    }
+
+    .navbar__item:last-child {
+      border-bottom: none; /* Elimina el borde del último elemento */
     }
 
     .navbar__link {
       display: block;
       padding: 0.5rem;
+      width: 100%;
+      font-size: 16px; /* Texto más grande para mejor tap target */
     }
   }
 </style>
