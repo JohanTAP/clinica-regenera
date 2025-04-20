@@ -1,5 +1,272 @@
 ---
-// src/pages/blog/index.astro
-// Redirige /blog a /blog/1
-return Astro.redirect("/blog/1", 301); // 301 para redirección permanente
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import BlogCard from "../../components/blog/BlogCard.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import ButtonUp from "../../components/ButtonUp.astro";
+import type { Page } from "astro";
+
+// Obtenemos los posts para la primera página
+export async function getStaticProps() {
+    const posts = await getCollection("blog");
+    const sortedPosts = posts.sort(
+        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    );
+
+    // Creamos manualmente un objeto similar a "page" con los primeros 2 posts (igual que pageSize en [page].astro)
+    const pageSize = 2;
+    const totalPosts = sortedPosts.length;
+    const totalPages = Math.ceil(totalPosts / pageSize);
+
+    const page = {
+        data: sortedPosts.slice(0, pageSize),
+        start: 0,
+        end: pageSize - 1,
+        size: pageSize,
+        total: totalPosts,
+        currentPage: 1,
+        lastPage: totalPages,
+        url: {
+            current: "/blog",
+            prev: undefined,
+            next: totalPages > 1 ? "/blog/2" : undefined,
+        },
+    };
+
+    return { page };
+}
+
+const { page } = Astro.props;
+
+// Variables para el diseño de la página
+const title = `Blog | Clínica Regenera`;
+const description =
+    "Artículos e información sobre salud, bienestar, quiropraxia, kinesiología, osteopatía y más.";
 ---
+
+<Layout title={title}>
+    <Navbar />
+    <div class="scroll-container" id="scroll-container">
+        <header class="blog-header">
+            <div class="blog-header__overlay"></div>
+            <div class="blog-header__content">
+                <h1 class="blog-header__title">Blog de Salud y Bienestar</h1>
+                <p class="blog-header__description">{description}</p>
+            </div>
+        </header>
+
+        <div class="blog-background-wrapper">
+            <main class="blog-main">
+                <div class="blog-grid">
+                    {
+                        page.data.length > 0 ? (
+                            page.data.map((post) => (
+                                <div class="blog-grid__item">
+                                    <BlogCard post={post} />
+                                </div>
+                            ))
+                        ) : (
+                            <p class="blog-empty">
+                                No hay artículos disponibles.
+                            </p>
+                        )
+                    }
+                </div>
+
+                <!-- Controles de paginación -->
+                <nav class="pagination-nav" aria-label="Navegación del blog">
+                    {
+                        page.url.prev ? (
+                            <a
+                                href={page.url.prev}
+                                class="pagination-link prev"
+                            >
+                                &larr; Anteriores
+                            </a>
+                        ) : (
+                            <span class="pagination-link disabled">
+                                &larr; Anteriores
+                            </span>
+                        )
+                    }
+
+                    <span class="page-indicator">
+                        Página {page.currentPage} de {page.lastPage}
+                    </span>
+
+                    {
+                        page.url.next ? (
+                            <a
+                                href={page.url.next}
+                                class="pagination-link next"
+                            >
+                                Siguientes &rarr;
+                            </a>
+                        ) : (
+                            <span class="pagination-link disabled">
+                                Siguientes &rarr;
+                            </span>
+                        )
+                    }
+                </nav>
+            </main>
+        </div>
+
+        <Footer />
+        <ButtonUp />
+    </div>
+</Layout>
+
+<style>
+    .pagination-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 3rem;
+        padding: 1rem 0;
+        border-top: 1px solid #ddd;
+    }
+
+    .pagination-link {
+        padding: 0.5rem 1rem;
+        border: 1px solid #3db7b0;
+        color: #3db7b0;
+        text-decoration: none;
+        border-radius: 5px;
+        transition:
+            background-color 0.3s,
+            color 0.3s;
+    }
+
+    .pagination-link:hover {
+        background-color: #3db7b0;
+        color: white;
+    }
+
+    .pagination-link.disabled {
+        color: #aaa;
+        border-color: #ddd;
+        pointer-events: none;
+    }
+
+    .page-indicator {
+        color: #555;
+        font-weight: 500;
+    }
+
+    .blog-header {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    .blog-header__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            135deg,
+            rgba(61, 183, 176, 0.85),
+            rgba(35, 93, 90, 0.85)
+        );
+        z-index: 1;
+    }
+
+    .blog-header__content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .blog-header__title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .blog-header__description {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+
+    .blog-background-wrapper {
+        background-color: #f1f9f9;
+        background-image: radial-gradient(#3db7b033 1px, transparent 1px);
+        background-size: 15px 15px;
+        padding: 3rem 1.5rem 4rem;
+    }
+
+    .blog-main {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        justify-content: center;
+    }
+
+    .blog-grid__item {
+        display: flex;
+    }
+
+    .blog-empty {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3rem;
+        background-color: #f5f5f5;
+        border-radius: 15px;
+        font-size: 1.2rem;
+        color: #666;
+    }
+
+    @media (max-width: 1024px) {
+        .blog-header__title {
+            font-size: 2.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .blog-header {
+            padding: 5rem 1.5rem 3rem;
+        }
+
+        .blog-header__title {
+            font-size: 2rem;
+        }
+
+        .blog-header__description {
+            font-size: 1rem;
+        }
+        .blog-background-wrapper {
+            padding: 2rem 1rem 3rem;
+        }
+        .pagination-nav {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .page-indicator {
+            order: -1;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .blog-grid {
+            grid-template-columns: 1fr;
+        }
+        .blog-background-wrapper {
+            padding: 2rem 1rem 3rem;
+        }
+    }
+</style>
