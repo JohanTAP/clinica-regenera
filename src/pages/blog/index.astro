@@ -12,6 +12,9 @@ const sortedPosts = posts.sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
+// Mostrar solo las últimas 2 entradas
+const postsToShow = sortedPosts.slice(0, 2);
+
 // Variables para el diseño de la página
 const title = "Blog | Clínica Regenera";
 const description =
@@ -22,30 +25,34 @@ const description =
     <Navbar />
     <div class="scroll-container" id="scroll-container">
         <header class="blog-header">
+            <div class="blog-header__overlay"></div>
             <div class="blog-header__content">
                 <h1 class="blog-header__title">Blog de Salud y Bienestar</h1>
                 <p class="blog-header__description">{description}</p>
             </div>
         </header>
 
-        <main class="blog-main">
-            <div class="blog-grid">
-                {
-                    sortedPosts.length > 0 ? (
-                        sortedPosts.map((post) => (
-                            <div class="blog-grid__item">
-                                <BlogCard post={post} />
-                            </div>
-                        ))
-                    ) : (
-                        <p class="blog-empty">
-                            Próximamente publicaremos artículos sobre salud y
-                            bienestar. ¡Vuelve pronto!
-                        </p>
-                    )
-                }
-            </div>
-        </main>
+        <div class="blog-background-wrapper">
+            <main class="blog-main">
+                <div class="blog-grid">
+                    {
+                        postsToShow.length > 0 ? (
+                            postsToShow.map((post) => (
+                                <div class="blog-grid__item">
+                                    <BlogCard post={post} />
+                                </div>
+                            ))
+                        ) : (
+                            <p class="blog-empty">
+                                Próximamente publicaremos artículos sobre salud
+                                y bienestar. ¡Vuelve pronto!
+                            </p>
+                        )
+                    }
+                </div>
+                <!-- Aquí se podría añadir la lógica de paginación completa en el futuro -->
+            </main>
+        </div>
 
         <Footer />
         <ButtonUp />
@@ -54,18 +61,32 @@ const description =
 
 <style>
     .blog-header {
-        background: linear-gradient(
-            90deg,
-            rgba(27, 81, 78, 0.8) 0%,
-            rgba(61, 183, 176, 0.8) 100%
-        );
+        position: relative; /* Needed for overlay */
+        background-size: cover;
+        background-position: center;
         color: white;
         padding: 6rem 2rem 4rem;
         text-align: center;
-        margin-bottom: 3rem;
+        margin-bottom: 0; /* Remove margin as background-wrapper will handle spacing */
+    }
+
+    .blog-header__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            135deg,
+            rgba(61, 183, 176, 0.85),
+            rgba(35, 93, 90, 0.85)
+        ); /* Gradient overlay similar to contacto */
+        z-index: 1;
     }
 
     .blog-header__content {
+        position: relative; /* Ensure content is above overlay */
+        z-index: 2;
         max-width: 800px;
         margin: 0 auto;
     }
@@ -79,19 +100,38 @@ const description =
     .blog-header__description {
         font-size: 1.2rem;
         line-height: 1.6;
-        margin-bottom: 2rem;
+        margin-bottom: 0; /* Remove bottom margin */
+    }
+
+    .blog-background-wrapper {
+        background-color: #f1f9f9; /* Match contacto */
+        background-image: radial-gradient(
+            #3db7b033 1px,
+            transparent 1px
+        ); /* Dotted background */
+        background-size: 15px 15px;
+        padding: 3rem 1.5rem 4rem; /* Add padding top/bottom */
     }
 
     .blog-main {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 2rem 4rem;
+        /* padding removed, handled by blog-background-wrapper */
     }
 
     .blog-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(300px, 1fr)
+        ); /* Responsive columns */
         gap: 2rem;
+        justify-content: center; /* Center grid items horizontally */
+    }
+
+    .blog-grid__item {
+        /* Ensures cards take full height if needed, useful for alignment */
+        display: flex;
     }
 
     .blog-empty {
@@ -105,10 +145,10 @@ const description =
     }
 
     @media (max-width: 1024px) {
-        .blog-grid {
+        /* Adjust grid for 2 columns if auto-fit doesn't behave as desired */
+        /* .blog-grid {
             grid-template-columns: repeat(2, 1fr);
-        }
-
+        } */
         .blog-header__title {
             font-size: 2.5rem;
         }
@@ -126,15 +166,18 @@ const description =
         .blog-header__description {
             font-size: 1rem;
         }
+        .blog-background-wrapper {
+            padding: 2rem 1rem 3rem;
+        }
     }
 
     @media (max-width: 600px) {
         .blog-grid {
+            /* Ensure single column on small screens */
             grid-template-columns: 1fr;
         }
-
-        .blog-main {
-            padding: 0 1rem 3rem;
+        .blog-background-wrapper {
+            padding: 2rem 1rem 3rem;
         }
     }
 </style>
