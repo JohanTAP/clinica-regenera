@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import ButtonUp from "../components/ButtonUp.astro";
+// Import Lucide icons
+import { Phone, Smartphone, Mail } from "@lucide/astro";
 ---
 
 <Layout title="Contacto | Clínica Regenera">
@@ -10,44 +12,88 @@ import ButtonUp from "../components/ButtonUp.astro";
   <div class="scroll-container" id="scroll-container">
     <header class="contacto-header">
       <div class="contacto-header__content">
-        <h1>Regenera Contacto</h1>
+        <h1>Contacto</h1>
       </div>
     </header>
 
-    <main class="contacto-main">
-      <section class="contacto-form">
-        <h2>Conversemos</h2>
-        <form>
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" required />
+    <div class="contacto-background-wrapper">
+      <main class="contacto-main">
+        <section class="contacto-form">
+          <!-- This is the main white container -->
+          <div class="form-content-wrapper">
+            <!-- Wrapper for left column (form + info) -->
+            <h2>Conversemos</h2>
+            <form>
+              <label for="nombre">Nombre:</label>
+              <input type="text" id="nombre" name="nombre" required />
 
-          <label for="ciudad">Ciudad:</label>
-          <input type="text" id="ciudad" name="ciudad" required />
+              <label for="ciudad">Ciudad:</label>
+              <input type="text" id="ciudad" name="ciudad" required />
 
-          <label for="telefono">Teléfono:</label>
-          <input type="tel" id="telefono" name="telefono" required />
+              <label for="telefono">Teléfono:</label>
+              <input type="tel" id="telefono" name="telefono" required />
 
-          <label for="email">E-mail:</label>
-          <input type="email" id="email" name="email" required />
+              <label for="email">E-mail:</label>
+              <input type="email" id="email" name="email" required />
 
-          <label for="mensaje">Mensaje:</label>
-          <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+              <label for="mensaje">Mensaje:</label>
+              <textarea id="mensaje" name="mensaje" rows="4" required
+              ></textarea>
 
-          <button type="submit" class="btn btn--enviar">ENVIAR</button>
-        </form>
-      </section>
+              <button type="submit" class="btn btn--enviar">ENVIAR</button>
+            </form>
+            <!-- Contact info section -->
+            <div class="contacto-info">
+              <div class="info-item">
+                <Phone class="lucide-icon" />
+                <!-- Lucide Icon -->
+                <div class="info-text">
+                  <!-- Wrapper for text -->
+                  <span>Teléfono</span>
+                  <a href="tel:+56954643631">9 5464 3631</a>
+                </div>
+              </div>
+              <div class="info-item">
+                <Smartphone class="lucide-icon" />
+                <!-- Lucide Icon -->
+                <div class="info-text">
+                  <!-- Wrapper for text -->
+                  <span>Whatsapp</span>
+                  <a href="https://wa.me/56954643631" target="_blank"
+                    >9 5464 3631</a
+                  >
+                </div>
+              </div>
+              <div class="info-item">
+                <Mail class="lucide-icon" />
+                <!-- Lucide Icon -->
+                <div class="info-text">
+                  <!-- Wrapper for text -->
+                  <span>E-MAIL</span>
+                  <a href="mailto:info@clinicaregenera.cl"
+                    >info@clinicaregenera.cl</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <section class="contacto-mapa">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509374!2d-71.54894668468136!3d-36.82522797994633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9665cfb6c5c5c5c5%3A0x1234567890abcdef!2sCalle%2030%20Ote.%201420%2C%20Talca%2C%20Maule!5e0!3m2!1ses!2scl!4v1234567890123"
-          width="100%"
-          height="400"
-          style="border:0;"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </section>
-    </main>
+          <div class="map-wrapper">
+            <!-- Wrapper for right column (map) -->
+            <section class="contacto-mapa">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509374!2d-71.54894668468136!3d-36.82522797994633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9665cfb6c5c5c5c5%3A0x1234567890abcdef!2sCalle%2030%20Ote.%201420%2C%20Talca%2C%20Maule!5e0!3m2!1ses!2scl!4v1234567890123"
+                width="100%"
+                height="100%"
+                style="border:0; border-radius: 8px;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
 
     <Footer />
     <ButtonUp />
@@ -56,9 +102,7 @@ import ButtonUp from "../components/ButtonUp.astro";
 
 <style>
   .contacto-header {
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url("/assets/images/contacto-header.jpg") no-repeat center center/cover;
+    background: linear-gradient(135deg, #3db7b0, #235d5a);
     color: white;
     text-align: center;
     padding: 4rem 1rem;
@@ -66,72 +110,200 @@ import ButtonUp from "../components/ButtonUp.astro";
 
   .contacto-header__content h1 {
     font-size: 2.5rem;
-    margin: 0;
+    margin-bottom: 0.5rem; /* Added to match sobre-mi */
+  }
+
+  .contacto-background-wrapper {
+    background-color: #f1f9f9;
+    background-image: radial-gradient(#3db7b033 1px, transparent 1px);
+    background-size: 15px 15px;
+    padding: 3rem 1.5rem; /* Adjusted padding */
   }
 
   .contacto-main {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 2rem 1rem;
-    max-width: 1200px;
+    max-width: 1152px; /* Max width of the white container */
     margin: 0 auto;
   }
 
-  .contacto-form,
-  .contacto-mapa {
-    flex: 1 1 45%;
+  .contacto-form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex; /* Use flex for inner columns */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 2rem; /* Gap between inner columns */
+    max-width: 9z0px; /* Slightly increase max-width */
+  }
+
+  .form-content-wrapper {
+    /* Left column */
+    flex: 1 1 45%; /* Give slightly less basis/grow */
+    min-width: 300px;
+  }
+
+  .map-wrapper {
+    /* Right column */
+    flex: 1 1 50%; /* Give slightly more basis/grow */
+    min-width: 300px; /* Increase min-width slightly */
+    min-height: 400px; /* Ensure map has height */
   }
 
   .contacto-form h2 {
     font-size: 1.8rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     color: #3db7b0;
+    text-align: left;
   }
 
   .contacto-form form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-bottom: 2rem;
   }
 
   .contacto-form label {
     font-size: 1rem;
     color: #555;
+    margin-bottom: -0.5rem;
   }
 
   .contacto-form input,
   .contacto-form textarea {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
+    box-sizing: border-box;
+  }
+
+  .contacto-form textarea {
+    resize: vertical;
   }
 
   .btn--enviar {
     background-color: #3db7b0;
     color: white;
     border: none;
-    padding: 0.75rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+    font-weight: bold;
     transition: background-color 0.3s ease;
+    align-self: flex-start;
   }
 
   .btn--enviar:hover {
     background-color: #2a8a7a;
   }
 
-  @media (max-width: 768px) {
-    .contacto-main {
-      flex-direction: column;
-    }
+  .contacto-info {
+    display: flex;
+    flex-direction: row; /* Align items in a row */
+    gap: 1.5rem; /* Adjust gap between items */
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+    margin-bottom: 0; /* Remove bottom margin as map is no longer below */
+  }
 
-    .contacto-form,
-    .contacto-mapa {
-      flex: 1 1 100%;
+  .info-item {
+    display: flex;
+    lex-direction: column;
+    align-items: center; /* Align icon and text vertically */
+    flex: 1;
+  }
+
+  .lucide-icon {
+    /* Style for Lucide icons */
+    width: 28px; /* Adjust size */
+    height: 28px;
+    color: #3db7b0;
+    margin-right: 1rem; /* Space between icon and text */
+    stroke-width: 2; /* Adjust line thickness */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+  }
+
+  .info-text {
+    /* Style for the text wrapper */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info-item span {
+    font-weight: bold;
+    color: #333;
+    font-size: 0.9rem;
+  }
+
+  .info-item a {
+    color: #555;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+  }
+
+  .info-item a:hover {
+    color: #3db7b0;
+    text-decoration: underline;
+  }
+
+  .contacto-mapa {
+    /* Style the map section itself if needed */
+    height: 100%; /* Make section fill wrapper */
+  }
+
+  .contacto-mapa iframe {
+    width: 100%;
+    height: 100%; /* Make iframe fill section */
+    border-radius: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .contacto-background-wrapper {
+      padding: 3rem 1rem; /* Adjust padding */
+    }
+    .contacto-main {
+      flex-direction: column; /* Stack on mobile */
+      padding: 0; /* Remove padding, handled by wrapper */
+    }
+    .contacto-form {
+      padding: 1.5rem; /* Reduce padding on mobile */
+    }
+    .form-content-wrapper,
+    .map-wrapper {
+      flex-basis: 100%; /* Make each column full width */
+    }
+    .map-wrapper {
+      min-height: 300px; /* Adjust height for mobile */
+    }
+    .contacto-info {
+      gap: 1.5rem; /* Increase gap */
+    }
+    .info-item {
+      flex-direction: row; /* Icon and text side-by-side */
+      align-items: center;
+      width: 100%;
+    }
+    .lucide-icon {
+      margin-bottom: 0; /* Remove bottom margin */
+      margin-right: 0.75rem; /* Add right margin */
+    }
+    .info-text {
+      /* Mobile text styles */
+    }
+    .info-item span {
+      margin-bottom: 0;
+      margin-right: 0.5rem;
+    }
+    .info-item a {
+      /* margin-left: auto; Removed - let flex handle spacing */
+    }
+    .contacto-mapa iframe {
+      height: 300px; /* Adjust map height */
     }
   }
 </style>
