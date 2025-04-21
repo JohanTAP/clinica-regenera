@@ -127,7 +127,9 @@ import { ClientRouter } from "astro:transitions"; // Updated import
 		<ClientRouter />
 	</head>
 	<body>
-		<slot />
+		<div class="scroll-container">
+			<slot />
+		</div>
 		<script>
 			// Importamos el script principal usando la sintaxis correcta de Astro
 			import "../scripts/main.js";
