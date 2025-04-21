@@ -1,5 +1,6 @@
 ---
-
+import { Image } from "astro:assets";
+import logoBlanco from "/public/assets/images/logo-blanco.webp";
 ---
 
 <section
@@ -92,11 +93,13 @@
             </div>
 
             <div class="col col-md-4 mb-3 text-center">
-                <img
-                    src="/assets/images/logo-blanco.webp"
-                    loading="lazy"
+                <Image
+                    src={logoBlanco}
                     alt="Logotipo de Clínica Regenera"
-                    style="width: 130px; height: 123px;"
+                    width={130}
+                    height={123}
+                    class="footer-logo"
+                    format="webp"
                 />
             </div>
         </div>
