@@ -27,24 +27,25 @@
   #back-to-top-link {
     display: inline-block;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #f6c61b;
-    font-size: 18px;
+    bottom: 15px; /* Ajustado como en móvil */
+    right: 15px; /* Ajustado como en móvil */
+    background-color: rgba(246, 198, 27, 0.85); /* Amarillo con 85% opacidad */
+    font-size: 16px; /* Tamaño de fuente reducido */
     text-align: center;
     text-decoration: none;
     color: white;
-    padding: 10px 20px;
+    padding: 8px 15px; /* Padding reducido */
     border-radius: 5px;
     text-decoration: none;
 
     font-weight: bold;
     transition: all 0.4s ease;
-    margin: 10px 0.5rem;
     cursor: pointer;
+    z-index: 1000;
   }
 
   #back-to-top-link:hover {
-    background-color: #d5a517;
+    background-color: #d5a517; /* Color sólido en hover */
+    opacity: 1; /* Asegurar opacidad completa en hover */
   }
 </style>
