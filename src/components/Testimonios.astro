@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
-import videoThumb from "/public/assets/images/video1-thumbnail.webp";
+import videoThumb1 from "/public/assets/images/video1-thumbnail.webp";
+import videoThumb2 from "/public/assets/images/video2-thumbnail.jpg";
+import videoThumb3 from "/public/assets/images/video3-thumbnail.jpg";
 ---
 
 <section
@@ -21,18 +23,66 @@ import videoThumb from "/public/assets/images/video1-thumbnail.webp";
   <div class="carousel__videos">
     <div class="carousel__video">
       <Image
-        src={videoThumb}
+        src={videoThumb1}
         alt="Testimonio 1"
         width={300}
         height={500}
         format="webp"
         quality={80}
       />
-      <button class="carousel__play-button" aria-label="Reproducir video"
-        >▶</button
+      <button
+        class="carousel__play-button"
+        data-video-target="testimonio-video-1"
+        aria-label="Reproducir video 1">▶</button
       >
-      <video id="testimonio-video" class="hidden" controls preload="none">
+      <!-- Añadido data-video-target -->
+      <video id="testimonio-video-1" class="hidden" controls preload="none">
+        <!-- ID único -->
         <source src="/testimonio1.mp4" type="video/mp4" />
+        Tu navegador no soporta la reproducción de videos.
+      </video>
+    </div>
+    <!-- Testimonio 2 -->
+    <div class="carousel__video">
+      <Image
+        src={videoThumb2}
+        alt="Testimonio 2"
+        width={300}
+        height={500}
+        format="webp"
+        quality={80}
+      />
+      <button
+        class="carousel__play-button"
+        data-video-target="testimonio-video-2"
+        aria-label="Reproducir video 2">▶</button
+      >
+      <!-- Añadido data-video-target -->
+      <video id="testimonio-video-2" class="hidden" controls preload="none">
+        <!-- ID único -->
+        <source src="/testimonio2.mp4" type="video/mp4" />
+        Tu navegador no soporta la reproducción de videos.
+      </video>
+    </div>
+    <!-- Testimonio 3 -->
+    <div class="carousel__video">
+      <Image
+        src={videoThumb3}
+        alt="Testimonio 3"
+        width={300}
+        height={500}
+        format="webp"
+        quality={80}
+      />
+      <button
+        class="carousel__play-button"
+        data-video-target="testimonio-video-3"
+        aria-label="Reproducir video 3">▶</button
+      >
+      <!-- Añadido data-video-target -->
+      <video id="testimonio-video-3" class="hidden" controls preload="none">
+        <!-- ID único -->
+        <source src="/testimonio3.mp4" type="video/mp4" />
         Tu navegador no soporta la reproducción de videos.
       </video>
     </div>
@@ -55,7 +105,7 @@ import videoThumb from "/public/assets/images/video1-thumbnail.webp";
   .carousel {
     background-color: #3db7b0;
     color: white;
-    padding: 20px;
+    padding: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,7 +129,9 @@ import videoThumb from "/public/assets/images/video1-thumbnail.webp";
 
   .carousel__videos {
     display: flex;
-    justify-content: center;
+    justify-content: space-around; /* Distribuye el espacio */
+    flex-wrap: wrap; /* Permite que los videos se envuelvan en pantallas pequeñas */
+    gap: 20px; /* Añade espacio entre los videos */
     width: 100%;
     max-width: 1200px;
     margin-bottom: 20px;
@@ -181,4 +233,81 @@ import videoThumb from "/public/assets/images/video1-thumbnail.webp";
     clip: rect(0, 0, 0, 0);
     border: 0;
   }
+
+  /* Ajustes responsivos si son necesarios */
+  @media (max-width: 1024px) {
+    .carousel__videos {
+      justify-content: center; /* Centrar en pantallas medianas */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .carousel__video {
+      width: 80%; /* Ajustar ancho en móviles */
+      max-width: 300px; /* Mantener un máximo razonable */
+      height: auto; /* Altura automática basada en el contenido/aspecto */
+      aspect-ratio: 3 / 5; /* Mantener proporción si es necesario */
+    }
+    .carousel__encabezado h3 {
+      font-size: 1.8rem;
+    }
+    .carousel__encabezado p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carousel__video {
+      width: 90%; /* Más ancho en pantallas muy pequeñas */
+    }
+  }
 </style>
+
+<script>
+  // Script para manejar múltiples botones/videos
+  document.addEventListener("DOMContentLoaded", () => {
+    const playButtons = document.querySelectorAll(".carousel__play-button");
+
+    playButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const videoId = button.getAttribute("data-video-target");
+        const videoElement = document.getElementById(videoId);
+        const imageElement = button.previousElementSibling; // Asume que la imagen está justo antes
+
+        if (videoElement instanceof HTMLVideoElement && imageElement) {
+          // Ocultar imagen y botón de play
+          imageElement.classList.add("hidden");
+          button.classList.add("hidden");
+          // Mostrar y reproducir video
+          videoElement.classList.remove("hidden");
+          videoElement.play();
+        }
+      });
+    });
+
+    // Opcional: Detener otros videos cuando uno empieza a reproducirse
+    const videos = document.querySelectorAll(".carousel__video video");
+    videos.forEach((video) => {
+      video.addEventListener("play", () => {
+        videos.forEach((otherVideo) => {
+          if (otherVideo !== video && otherVideo instanceof HTMLVideoElement) {
+            otherVideo.pause();
+            // Opcional: Mostrar miniatura/botón de nuevo si se pausa otro video
+            const otherButton = document.querySelector(
+              '.carousel__play-button[data-video-target="' +
+                otherVideo.id +
+                '"]',
+            );
+            const otherImage = otherButton?.previousElementSibling;
+            if (otherButton && otherImage && otherVideo.paused) {
+              otherImage.classList.remove("hidden");
+              otherButton.classList.remove("hidden");
+              otherVideo.classList.add("hidden"); // Ocultar el video de nuevo
+              // Por simplicidad, solo pausamos y mostramos miniatura/botón.
+            }
+          }
+        });
+      });
+    });
+  });
+</script>
