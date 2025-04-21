@@ -17,76 +17,50 @@ import logo from "/public/assets/images/logo.webp";
       />
     </a>
 
-    <!-- Menú de escritorio - siempre visible en pantallas grandes -->
+    <!-- Menú de escritorio - siempre visible en pantallas grandes y medianas -->
     <div class="desktop-menu">
       <ul class="navbar__nav">
-        <!-- <li class="navbar__item">
-          <a class="navbar__link smooth-scroll" href="/#tratamientos"
-            >Tratamientos</a
-          >
-        </li>
-        <li class="navbar__item">
-          <a class="navbar__link smooth-scroll" href="/#tu-cita">Tu cita</a>
-        </li>
-        <li class="navbar__item">
-          <a class="navbar__link smooth-scroll" href="/#testimonio"
-            >Testimonios</a
-          >
-        </li> -->
         <li class="navbar__item">
           <a class="navbar__link" href="/">Inicio</a>
-          <li class="navbar__item">
-            <a class="navbar__link" href="/sobre-mi">Sobre mí</a>
-          </li>
-          <li class="navbar__item">
-            <a class="navbar__link" href="/contacto">Contacto</a>
-          </li>
-          <li class="navbar__item">
-            <a class="navbar__link" href="/blog/">Blog</a>
-          </li>
+        </li>
+        <li class="navbar__item">
+          <a class="navbar__link" href="/sobre-mi">Sobre mí</a>
+        </li>
+        <li class="navbar__item">
+          <a class="navbar__link" href="/contacto">Contacto</a>
+        </li>
+        <li class="navbar__item">
+          <a class="navbar__link" href="/blog/">Blog</a>
         </li>
       </ul>
-
-      <!-- Botón hamburguesa - solo visible en móvil -->
-      <button
-        class="navbar__toggler"
-        id="navbarToggler"
-        aria-label="Abrir menú de navegación"
-        type="button"
-      >
-        <span class="navbar__toggler-icon"></span>
-        <span class="navbar__toggler-icon"></span>
-        <span class="navbar__toggler-icon"></span>
-      </button>
     </div>
+
+    <!-- Botón hamburguesa - solo visible en móvil -->
+    <button
+      class="navbar__toggler"
+      id="navbarToggler"
+      aria-label="Abrir menú de navegación"
+      type="button"
+    >
+      <span class="navbar__toggler-icon"></span>
+      <span class="navbar__toggler-icon"></span>
+      <span class="navbar__toggler-icon"></span>
+    </button>
 
     <!-- Menú móvil separado - oculto por defecto -->
     <div class="mobile-menu" id="mobileMenu">
       <ul class="mobile-menu__nav">
-        <!-- <li class="mobile-menu__item">
-        <a class="mobile-menu__link smooth-scroll" href="/#tratamientos"
-          >Tratamientos</a
-        >
-      </li>
-      <li class="mobile-menu__item">
-        <a class="mobile-menu__link smooth-scroll" href="/#tu-cita">Tu cita</a>
-      </li>
-      <li class="mobile-menu__item">
-        <a class="mobile-menu__link smooth-scroll" href="/#testimonio"
-          >Testimonios</a
-        >
-      </li> -->
         <li class="mobile-menu__item">
           <a class="mobile-menu__link" href="/">Inicio</a>
-          <li class="mobile-menu__item">
-            <a class="mobile-menu__link" href="/sobre-mi">Sobre mí</a>
-          </li>
-          <li class="mobile-menu__item">
-            <a class="mobile-menu__link" href="/contacto">Contacto</a>
-          </li>
-          <li class="mobile-menu__item">
-            <a class="mobile-menu__link" href="/blog/">Blog</a>
-          </li>
+        </li>
+        <li class="mobile-menu__item">
+          <a class="mobile-menu__link" href="/sobre-mi">Sobre mí</a>
+        </li>
+        <li class="mobile-menu__item">
+          <a class="mobile-menu__link" href="/contacto">Contacto</a>
+        </li>
+        <li class="mobile-menu__item">
+          <a class="mobile-menu__link" href="/blog/">Blog</a>
         </li>
       </ul>
     </div>
@@ -189,12 +163,12 @@ import logo from "/public/assets/images/logo.webp";
         width: 100%;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 10px;
+        padding: 10px 20px;
       }
 
       .navbar__brand .navbar__logo {
-        width: 149px;
-        height: 48px;
+        width: 130px;
+        height: auto;
       }
 
       /* Estilos para el menú de escritorio */
@@ -211,18 +185,19 @@ import logo from "/public/assets/images/logo.webp";
       }
 
       .navbar__item {
-        margin-left: 1rem;
+        margin-left: 1.5rem;
       }
 
       .navbar__link {
         color: #ffffff;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 15px;
         line-height: 18px;
         text-decoration: none;
         position: relative;
         padding: 0.5rem 0;
         transition: color 0.4s ease;
+        white-space: nowrap;
       }
 
       .navbar__link::after {
@@ -258,7 +233,7 @@ import logo from "/public/assets/images/logo.webp";
         display: none;
         position: relative;
         z-index: 1100;
-        padding: 16px;
+        padding: 10px;
       }
 
       .navbar__toggler-icon {
@@ -275,13 +250,11 @@ import logo from "/public/assets/images/logo.webp";
         display: none;
         width: 100%;
         position: absolute;
-        top: 100%;
+        top: 68px; /* Ajustado para alinearse con la altura del navbar */
         left: 0;
-        background-color: rgba(0, 0, 0, 0.1); /* Mismo color que el navbar */
+        background-color: rgba(0, 0, 0, 0.1);
         padding: 1rem 0;
-        backdrop-filter: blur(
-          8px
-        ); /* Efecto de desenfoque para mejor legibilidad */
+        backdrop-filter: blur(10px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         z-index: 1090;
       }
@@ -321,12 +294,53 @@ import logo from "/public/assets/images/logo.webp";
         color: #3db7b0;
       }
 
-      /* Estilos responsive */
-      @media (max-width: 768px) {
-        .desktop-menu {
-          display: none;
+      /* Media query para pantallas grandes */
+      @media (min-width: 1025px) {
+        .navbar__item {
+          margin-left: 2.5rem;
         }
+        .navbar__link {
+          font-size: 16px;
+        }
+      }
 
+      /* Media query para pantallas medianas (1024px) */
+      @media (max-width: 1024px) and (min-width: 769px) {
+        .container {
+          padding: 5px 10px;
+          justify-content: space-between;
+        }
+        .navbar__brand {
+          flex-shrink: 1;
+        }
+        .navbar__brand .navbar__logo {
+          width: 100px;
+          height: auto;
+        }
+        .desktop-menu {
+          display: flex !important;
+          margin-right: 10px;
+        }
+        .navbar__nav {
+          margin-right: 10px;
+        }
+        .navbar__item {
+          margin-left: 12px;
+        }
+        .navbar__link {
+          font-size: 12px;
+          padding: 0.2rem 0;
+        }
+      }
+
+      /* Estilos responsive para móviles */
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+        .desktop-menu {
+          display: none !important;
+        }
         .navbar__toggler {
           display: block;
         }
