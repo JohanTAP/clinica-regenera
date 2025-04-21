@@ -46,63 +46,71 @@ import imgFoto2 from "/public/assets/images/foto2.webp";
       />
     </div>
   </div>
-  <div class="servicios__contenedor">
-    <div class="servicio-card servicio-card--horizontal">
-      <Image
-        src={imgFoto}
-        class="servicio-card__imagen"
-        alt="Imagen de Cita"
-        width={342}
-        height={250}
-        loading="lazy"
-        format="webp"
-        quality={80}
-      />
-      <div class="servicio-card__contenido">
-        <h3 class="servicio-card__titulo">Tu cita en Clínica Regenera</h3>
-        <p class="servicio-card__descripcion">
-          Buscamos tratar tu dolor de <b
-            >manera natural, sin fármacos ni cirugías.</b
-          >
-          Con las terapias manuales como herramienta principal y un enfoque personalizado
-          ajustado a tu estilo de vida, no solo aliviamos tu dolor, sino que también
-          trabajamos en prevenir futuras molestias.
-        </p>
+
+  <!-- Wrapper para alinear las tarjetas -->
+  <div class="servicios__cards-wrapper">
+    <div class="servicios__contenedor">
+      <div class="servicio-card servicio-card--horizontal">
+        <Image
+          src={imgFoto}
+          class="servicio-card__imagen"
+          alt="Imagen de Cita"
+          width={342}
+          height={250}
+          loading="lazy"
+          format="webp"
+          quality={80}
+        />
+        <div class="servicio-card__contenido">
+          <h3 class="servicio-card__titulo">Tu cita en Clínica Regenera</h3>
+          <p class="servicio-card__descripcion">
+            Buscamos tratar tu dolor de <b
+              >manera natural, sin fármacos ni cirugías.</b
+            >
+            Con las terapias manuales como herramienta principal y un enfoque personalizado
+            ajustado a tu estilo de vida, no solo aliviamos tu dolor, sino que también
+            trabajamos en prevenir futuras molestias.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-  <div
-    class="servicio-card servicio-card--horizontal servicio-card--texto-primero"
-  >
-    <div class="servicio-card__contenido">
-      <h3 class="servicio-card__titulo">
-        Conoce al Director de Clínica Regenera
-      </h3>
-      <ul class="servicio-card__descripcion">
-        <p>Mi nombre es Eduardo Osorio Shuffer</p>
-        <li>Kinesiólogo egresado de la Universidad Viña del Mar, Chile.</li>
-        <li>Osteópata de la Escuela de osteopatía de Ontario, Canadá.</li>
-        <li>
-          Diplomado en Osteopatía de la Academia Latinoamericana de Osteopatía
-          (ALO) Chile.
-        </li>
-        <li>Certificado en Medicina Ortopédica Cyriax, del GCI Institute.</li>
-        <li>
-          Master en Psiconeuroinmunologia clínica de la Universidad de
-          Salamanca, España en curso
-        </li>
-      </ul>
+    <div class="servicios__contenedor">
+      <div
+        class="servicio-card servicio-card--horizontal servicio-card--texto-primero"
+      >
+        <div class="servicio-card__contenido">
+          <h3 class="servicio-card__titulo">
+            Conoce al Director de Clínica Regenera
+          </h3>
+          <ul class="servicio-card__descripcion">
+            <p>Mi nombre es Eduardo Osorio Shuffer</p>
+            <li>Kinesiólogo egresado de la Universidad Viña del Mar, Chile.</li>
+            <li>Osteópata de la Escuela de osteopatía de Ontario, Canadá.</li>
+            <li>
+              Diplomado en Osteopatía de la Academia Latinoamericana de
+              Osteopatía (ALO) Chile.
+            </li>
+            <li>
+              Certificado en Medicina Ortopédica Cyriax, del GCI Institute.
+            </li>
+            <li>
+              Master en Psiconeuroinmunologia clínica de la Universidad de
+              Salamanca, España en curso
+            </li>
+          </ul>
+        </div>
+        <Image
+          src={imgFoto2}
+          class="servicio-card__imagen"
+          alt="Imagen del Director"
+          width={342}
+          height={250}
+          loading="lazy"
+          format="webp"
+          quality={80}
+        />
+      </div>
     </div>
-    <Image
-      src={imgFoto2}
-      class="servicio-card__imagen"
-      alt="Imagen del Director"
-      width={342}
-      height={250}
-      loading="lazy"
-      format="webp"
-      quality={80}
-    />
   </div>
 </section>
 
@@ -151,7 +159,6 @@ import imgFoto2 from "/public/assets/images/foto2.webp";
 
   .servicios__contenedor {
     display: flex;
-    justify-content: center;
     align-items: center;
     margin-bottom: 2rem;
   }
@@ -162,20 +169,27 @@ import imgFoto2 from "/public/assets/images/foto2.webp";
     align-items: center;
     margin-bottom: 2rem;
     gap: 1rem;
+    max-width: 1234px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
   }
 
   .media-card--video {
     position: relative;
-    width: 342px; /* Ajustado a 342px */
-    height: 566px; /* Ajustado a 566px */
+    width: 342px;
+    height: 566px;
     overflow: hidden;
-    border-radius: 50px; /* Ajustado a 50px */
+    border-radius: 50px;
   }
 
   .media-card--image {
-    width: 876px; /* Ajustado a 876px */
-    height: 566px; /* Ajustado a 566px */
-    border-radius: 50px; /* Ajustado a 50px */
+    width: 876px;
+    height: 566px;
+    border-radius: 50px;
   }
 
   .media-card__video {
@@ -184,25 +198,25 @@ import imgFoto2 from "/public/assets/images/foto2.webp";
     object-fit: cover;
     border-radius: 50px;
     display: block;
-    opacity: 1; /* Asegura que el video esté visible cuando no esté oculto */
+    opacity: 1;
     transition: opacity 0.3s ease;
     z-index: 1;
   }
 
   .media-card__video.hidden {
-    display: none; /* Controla la visibilidad del video */
+    display: none;
   }
 
   .media-card__video.active {
     opacity: 1;
-    z-index: 10; /* Forzar que esté encima de todo cuando se reproduce */
+    z-index: 10;
   }
 
   .media-card__imagen {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50px; /* Asegura que la imagen respete el radio de borde */
+    border-radius: 50px;
   }
 
   .hidden {
@@ -221,6 +235,7 @@ import imgFoto2 from "/public/assets/images/foto2.webp";
       border-color 0.3s ease,
       color 0.3s ease;
     border: 2px solid transparent;
+    width: 100%;
   }
 
   .servicio-card--horizontal {
@@ -277,6 +292,28 @@ import imgFoto2 from "/public/assets/images/foto2.webp";
     word-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  /* Nuevo wrapper para las tarjetas */
+  .servicios__cards-wrapper {
+    max-width: 1234px;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 1250px) {
+    .servicios__contenedor--media,
+    .servicios__cards-wrapper {
+      max-width: 100%;
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    .servicios__contenedor--media {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
   }
 
   @media (max-width: 1024px) {
