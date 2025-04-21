@@ -111,6 +111,14 @@ import videoThumb3 from "/public/assets/images/video3-thumbnail.jpg";
     align-items: center;
   }
 
+  /* Añadido para mejorar contraste del H2 y aplicar estilos de Tratamientos */
+  #testimonio-heading {
+    font-size: 2.5rem; /* Igual que .tratamientos__titulo */
+    text-align: center; /* Añadido para consistencia */
+    color: #333; /* Igual que .tratamientos__titulo */
+    margin-bottom: 1rem; /* Añadido espacio inferior */
+  }
+
   .carousel__encabezado {
     text-align: center;
     margin-bottom: 20px;
@@ -119,12 +127,13 @@ import videoThumb3 from "/public/assets/images/video3-thumbnail.jpg";
   .carousel__encabezado h3 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
-    color: #ffd700;
+    color: white; /* Cambiado de #ffd700 a white para contraste */
   }
 
   .carousel__encabezado p {
     font-size: 1.2rem;
     margin-bottom: 1rem;
+    color: #f0f0f0; /* Ligeramente gris para contraste */
   }
 
   .carousel__videos {
@@ -183,7 +192,7 @@ import videoThumb3 from "/public/assets/images/video3-thumbnail.jpg";
   }
 
   .carousel__link a {
-    color: #ffd700;
+    color: white; /* Cambiado de #ffd700 a white para contraste */
     text-decoration: none;
     font-weight: bold;
     font-size: 1.2rem;
@@ -205,7 +214,7 @@ import videoThumb3 from "/public/assets/images/video3-thumbnail.jpg";
 
   .carousel__link a:hover,
   .carousel__link a:focus {
-    color: white;
+    color: #f0f0f0; /* Ajustado hover/focus si es necesario */
   }
 
   .carousel__link a:hover::after,
