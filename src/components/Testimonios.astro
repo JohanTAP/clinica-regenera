@@ -127,13 +127,15 @@ import videoThumb3 from "/public/assets/images/video3-thumbnail.jpg";
   .carousel__encabezado h3 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
-    color: white; /* Cambiado de #ffd700 a white para contraste */
+    color: #003333; /* Color oscurecido para mejorar el contraste */
+    font-weight: bold;
   }
 
   .carousel__encabezado p {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    color: #f0f0f0; /* Ligeramente gris para contraste */
+    color: #004040; /* Color más oscuro para mejorar el contraste */
+    font-weight: 500;
   }
 
   .carousel__videos {
@@ -192,7 +194,7 @@ import videoThumb3 from "/public/assets/images/video3-thumbnail.jpg";
   }
 
   .carousel__link a {
-    color: white; /* Cambiado de #ffd700 a white para contraste */
+    color: #003333; /* Color oscurecido para mejorar el contraste */
     text-decoration: none;
     font-weight: bold;
     font-size: 1.2rem;
@@ -208,20 +210,20 @@ import videoThumb3 from "/public/assets/images/video3-thumbnail.jpg";
     display: block;
     margin-top: 5px;
     right: 0;
-    background: #fff;
+    background: #003333; /* Color oscurecido para mejorar el contraste */
     transition: width 0.4s ease;
   }
 
   .carousel__link a:hover,
   .carousel__link a:focus {
-    color: #f0f0f0; /* Ajustado hover/focus si es necesario */
+    color: #001a1a; /* Oscurecido aún más para el estado hover/focus */
   }
 
   .carousel__link a:hover::after,
   .carousel__link a:focus::after {
     width: 100%;
     left: 0;
-    background: white;
+    background: #003333;
   }
 
   .carousel__arrow {
