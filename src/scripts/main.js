@@ -1,5 +1,8 @@
 // Archivo principal de JavaScript para Clínica Regenera
 
+// Variable global para rastrear cuándo se cargó la página
+let pageLoadTime = Date.now();
+
 // ⚠️ La funcionalidad del menú de navegación ahora está implementada directamente en Navbar.astro
 // para evitar conflictos de manejadores de eventos
 
@@ -35,36 +38,62 @@ function setupModal() {
   const openModalButton = document.getElementById('openModalButton');
   const modal = document.getElementById('modal');
   const closeModalButton = document.getElementById('closeModal');
-  const scrollContainer = document.querySelector('.scroll-container');
+  const modalContent = modal?.querySelector('.modal__content');
+  const footer = document.querySelector('.container-fluid.bg-footer');
 
   if (modal && openModalButton) {
-    let lastScrollTime = 0;
+    let lastModalTime = 0;
 
     const showModal = () => {
       modal.style.display = 'flex';
+      modal.setAttribute('aria-modal', 'true');
+      // Eliminamos el focus en la X
     };
 
     const hideModal = () => {
       modal.style.display = 'none';
+      modal.setAttribute('aria-modal', 'false');
+      // Eliminamos el retorno del foco que causaba el desplazamiento
     };
 
     openModalButton.addEventListener('click', showModal);
 
     if (closeModalButton) {
       closeModalButton.addEventListener('click', hideModal);
+
+      // Añadir soporte para cerrar con tecla ESC
+      modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          hideModal();
+        }
+      });
+
+      // Añadir soporte para cerrar haciendo clic fuera del modal
+      modal.addEventListener('click', (e) => {
+        // Si el clic fue directamente en el fondo del modal (no en su contenido)
+        if (e.target === modal && modalContent && !modalContent.contains(e.target)) {
+          hideModal();
+        }
+      });
     }
 
-    if (scrollContainer) {
-      // Mostrar modal cuando llegue al final de la página
-      const checkScroll = () => {
-        const now = Date.now();
-        if ((scrollContainer.scrollTop + scrollContainer.clientHeight) >= scrollContainer.scrollHeight && now - lastScrollTime > 2000) {
-          showModal();
-          lastScrollTime = now;
-        }
-      };
+    // Detectar cuando el footer está visible
+    if (footer) {
+      const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const now = Date.now();
+          // Si el footer es visible y ha pasado tiempo suficiente
+          if (entry.isIntersecting && now - lastModalTime > 2000 && now - pageLoadTime > 1500) {
+            showModal();
+            lastModalTime = now;
+          }
+        });
+      }, {
+        threshold: 0.2
+      });
 
-      scrollContainer.addEventListener('scroll', checkScroll);
+      // Empezar a observar el footer
+      footerObserver.observe(footer);
     }
   }
 }
@@ -94,7 +123,6 @@ function setupVideoPlayback() {
 
 // Inicializar todas las funcionalidades cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM fully loaded, initializing components...');
   // setupNavbar(); // Comentado para evitar conflictos con Navbar.astro
   setupSmoothScroll();
   setupModal();
@@ -103,9 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // También aseguramos la inicialización para Astro View Transitions
 document.addEventListener('astro:page-load', () => {
-  console.log('Astro page loaded, initializing components...');
   // setupNavbar(); // Comentado para evitar conflictos con Navbar.astro
   setupSmoothScroll();
   setupModal();
   setupVideoPlayback();
+
+  // Actualizar la variable pageLoadTime para el nuevo estado de la página
+  pageLoadTime = Date.now();
 });
