@@ -2,8 +2,8 @@
 title: "Beneficios de la quiropraxia para el dolor de espalda"
 description: "Descubre cómo la quiropraxia puede ayudarte a aliviar el dolor de espalda y mejorar tu calidad de vida sin necesidad de cirugía o medicamentos."
 pubDate: 2025-03-31
-author: "Dr. Eduardo Osorio"
-authorImage: "/assets/images/blogicon.jpeg"
+author: "Klgo D.O. Eduardo Osorio"
+authorImage: "/assets/images/blogicon.png"
 image: "/assets/images/Quiropraxia.webp"
 tags: ["Quiropraxia", "Dolor de Espalda", "Salud Columna", "Ajuste Quiropráctico"]
 ---

@@ -2,8 +2,8 @@
 title: "Los múltiples beneficios de la osteopatía en el tratamiento del dolor"
 description: "Conoce cómo la osteopatía puede ayudarte a resolver problemas de dolor crónico y mejorar tu salud general a través de un enfoque holístico y terapias manuales."
 pubDate: 2025-03-15
-author: "Dr. Eduardo Osorio"
-authorImage: "/assets/images/blogicon.jpeg"
+author: "Klgo D.O. Eduardo Osorio"
+authorImage: "/assets/images/blogicon.png"
 image: "/assets/images/Osteopatia.webp"
 tags: ["Osteopatía", "Dolor crónico", "Salud holística", "Terapia manual"]
 ---
