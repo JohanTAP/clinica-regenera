@@ -59,8 +59,9 @@ import { Phone, Smartphone, Mail } from "@lucide/astro";
                 <div class="info-text">
                   <!-- Wrapper for text -->
                   <span>Whatsapp</span>
-                  <a href="https://api.whatsapp.com/send/?phone=56954643631" target="_blank"
-                    >9 5464 3631</a
+                  <a
+                    href="https://api.whatsapp.com/send/?phone=56954643631"
+                    target="_blank">9 5464 3631</a
                   >
                 </div>
               </div>
@@ -69,9 +70,9 @@ import { Phone, Smartphone, Mail } from "@lucide/astro";
                 <!-- Lucide Icon -->
                 <div class="info-text">
                   <!-- Wrapper for text -->
-                  <span>E-MAIL</span>
-                  <a href="mailto:info@clinicaregenera.cl"
-                    >info@clinicaregenera.cl</a
+                  <span>E-mail</span>
+                  <a href="mailto:contacto@clinicaregenera.cl"
+                    >contacto@clinicaregenera.cl</a
                   >
                 </div>
               </div>
@@ -212,9 +213,10 @@ import { Phone, Smartphone, Mail } from "@lucide/astro";
 
   .info-item {
     display: flex;
-    lex-direction: column;
-    align-items: center; /* Align icon and text vertically */
+    flex-direction: column;
+    align-items: center; /* Alinea icono y texto verticalmente */
     flex: 1;
+    text-align: center; /* Centra todo el texto */
   }
 
   .lucide-icon {
@@ -222,7 +224,7 @@ import { Phone, Smartphone, Mail } from "@lucide/astro";
     width: 28px; /* Adjust size */
     height: 28px;
     color: #3db7b0;
-    margin-right: 1rem; /* Space between icon and text */
+    margin-bottom: 0.5rem; /* Espacio entre icono y texto */
     stroke-width: 2; /* Adjust line thickness */
     flex-shrink: 0; /* Prevent icon from shrinking */
   }
@@ -281,12 +283,14 @@ import { Phone, Smartphone, Mail } from "@lucide/astro";
       min-height: 300px; /* Adjust height for mobile */
     }
     .contacto-info {
+      flex-direction: column; /* Stack items vertically on mobile */
       gap: 1.5rem; /* Increase gap */
     }
     .info-item {
       flex-direction: row; /* Icon and text side-by-side */
       align-items: center;
       width: 100%;
+      text-align: left; /* Alinea el texto a la izquierda en móvil */
     }
     .lucide-icon {
       margin-bottom: 0; /* Remove bottom margin */
@@ -294,13 +298,17 @@ import { Phone, Smartphone, Mail } from "@lucide/astro";
     }
     .info-text {
       /* Mobile text styles */
+      flex: 1; /* Allow text container to take remaining space */
     }
     .info-item span {
       margin-bottom: 0;
       margin-right: 0.5rem;
+      display: block; /* Ensure labels are on their own line */
     }
     .info-item a {
-      /* margin-left: auto; Removed - let flex handle spacing */
+      display: block; /* Make links display as blocks */
+      word-break: break-word; /* Allow email to break into multiple lines if needed */
+      font-size: 0.85rem; /* Slightly reduce font size for long emails */
     }
     .contacto-mapa iframe {
       height: 300px; /* Adjust map height */
