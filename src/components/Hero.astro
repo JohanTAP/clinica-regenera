@@ -398,6 +398,10 @@ const slidesData = slides.map((slide) => ({
     .hero__content {
       padding-left: 5%;
     }
+    
+    .hero__background-image {
+      object-position: 65% center; /* Ajustado para tabletas */
+    }
   }
 
   @media (max-width: 768px) {
@@ -427,6 +431,10 @@ const slidesData = slides.map((slide) => ({
     .hero__instructions {
       font-size: 18px;
     }
+    
+    .hero__background-image {
+      object-position: center center; /* Centrado para móviles */
+    }
   }
 
   @media (max-width: 576px) {
@@ -455,6 +463,10 @@ const slidesData = slides.map((slide) => ({
     .btn {
       width: 100%;
       max-width: 200px;
+    }
+    
+    .hero__background-image {
+      object-position: 45% center; /* Ligeramente hacia la izquierda en móviles pequeños */
     }
   }
 </style>
