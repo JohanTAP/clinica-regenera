@@ -1,58 +1,209 @@
 ---
 import { Image } from "astro:assets";
 import logoBlanco from "/public/assets/images/logo-blanco.webp";
-import fondoImage from "/public/assets/images/banner.png";
+// Importar las imágenes de slides disponibles
+import fondoImage1 from "/public/assets/images/Slide 1.jpg";
+import fondoImage2 from "/public/assets/images/Slide 2.jpg";
+import fondoImage3 from "/public/assets/images/Slide 3.jpg";
+import fondoImage4 from "/public/assets/images/Slide 4.jpg";
+import fondoImage5 from "/public/assets/images/Slide 5.jpg";
+import fondoImage6 from "/public/assets/images/Slide 6.jpg";
+
+// Definir los datos de cada slide (imagen y textos)
+const slides = [
+  {
+    image: fondoImage1,
+    alt: "Tratamiento en Clínica Regenera",
+    heading: "Vive una vida sin dolor",
+    highlightWord: "sin dolor",
+    subheading: "Kinesiología, Quiropraxia, Osteopatía y Medicina Ortopédica",
+    imageFormat: "jpg",
+  },
+  {
+    image: fondoImage2,
+    alt: "Tratamiento de cuello en Clínica Regenera",
+    heading: "Quiropraxia y osteopatía",
+    highlightWord: "osteopatía",
+    subheading:
+      "Alinea tu columna para aliviar dolores y optimiza el funcionamiento del cuerpo",
+    imageFormat: "jpg",
+  },
+  {
+    image: fondoImage3,
+    alt: "Tratamiento terapéutico en Clínica Regenera",
+    heading: "Recupera tu salud desde el origen",
+    highlightWord: "Ortopédica",
+    subheading: "",
+    imageFormat: "jpg",
+  },
+  {
+    image: fondoImage4,
+    alt: "Sesión de fisioterapia en Clínica Regenera",
+    heading: "<span class='text-nowrap'>Psiconeuro-</span>inmunología",
+    highlightWord: "",
+    subheading: "Estudia cómo mente, cuerpo y emociones se conectan para mejorar la salud",
+    imageFormat: "jpg",
+  },
+  {
+    image: fondoImage5,
+    alt: "Tratamiento integral en Clínica Regenera",
+    heading: "Medicina del estilo de vida",
+    highlightWord: "personalizado",
+    subheading: "",
+    imageFormat: "jpg",
+  },
+  {
+    image: fondoImage6,
+    alt: "Terapia manual en Clínica Regenera",
+    heading: "Suplementación",
+    highlightWord: "calidad de vida",
+    subheading: "Soluciones efectivas para dIncorpora vitaminas, minerales u otros nutrientes que  tu cuerpo necesita.",
+    imageFormat: "jpg",
+  },
+];
+
+// Pasar los datos de los slides al script del lado del cliente
+const slidesData = slides.map((slide) => ({
+  src: slide.image.src,
+  alt: slide.alt,
+  heading: slide.heading,
+  highlightWord: slide.highlightWord,
+  subheading: slide.subheading,
+}));
 ---
 
-<section class="hero" aria-labelledby="hero-heading">
-  <div class="hero__content">
-    <div class="hero__image">
-      <Image
-        src={logoBlanco}
-        width={250}
-        height={237}
-        alt="Logotipo de Clínica Regenera"
-        class="hero__logo"
-        loading="eager"
-        format="webp"
-      />
-    </div>
-    <div class="hero__texts">
-      <h1 id="hero-heading">
-        Vive una vida <span class="text-gradient">sin dolor</span>
-      </h1>
-      <p class="hero__instructions">
-        Kinesiología, Quiropraxia, Osteopatía y Medicina Ortopédica.
-      </p>
-    </div>
-    <div class="hero__buttons">
-      <button
-        class="btn btn-primary"
-        id="openModalButton"
-        aria-label="Reservar hora">Reservar hora</button
-      >
-      <button
-        class="btn btn-secondary"
-        onclick="window.location.href='#tu-cita'"
-        aria-label="Conoce más">Conoce más</button
-      >
-    </div>
+<section class="hero" id="hero-section" aria-labelledby="hero-heading">
+  <!-- Contenedor para las imágenes de fondo -->
+  <div class="hero__background-container">
+    {
+      slides.map((slide, index) => (
+        <Image
+          src={slide.image}
+          alt={slide.alt}
+          class={`hero__background-image ${index === 0 ? "active" : ""}`}
+          data-index={index}
+          loading="eager"
+          format="jpeg"
+          quality={90}
+          width={1920}
+          height={1080}
+          densities={[1, 1.5, 2]}
+        />
+      ))
+    }
   </div>
-  <div class="hero__banner">
-    <Image
-      src={fondoImage}
-      alt="Banner de tratamiento en Clínica Regenera"
-      class="banner-image"
-      width={1200}
-      height={1200}
-      loading="eager"
-      format="png"
-      quality={100}
-    />
+
+  <!-- Capa de superposición con gradiente -->
+  <div class="hero__overlay"></div>
+
+  <!-- Contenido del Hero posicionado a la izquierda -->
+  <div class="hero__content">
+    <div class="hero__content-inner">
+      <!-- Logo centrado (ya incluye el texto REGENERA) -->
+      <div class="hero__logo-container">
+        <img
+          src="/assets/images/logo-blanco.webp"
+          alt="Logo Regenera"
+          class="hero__logo-img"
+        />
+      </div>
+
+      <!-- Contenedor de altura fija para evitar layout shift -->
+      <div class="hero__text-fixed-container">
+        <!-- Título principal en línea única -->
+        <h1 id="hero-heading" class="fade-element active">
+          {/* El contenido se actualizará dinámicamente */}
+        </h1>
+
+        <!-- Subtítulo en línea única -->
+        <p id="hero-subheading" class="hero__instructions fade-element active">
+          {/* El contenido se actualizará dinámicamente */}
+        </p>
+      </div>
+
+      <!-- Botones en línea -->
+      <div class="hero__buttons">
+        <a
+          class="btn btn-primary"
+          id="openModalButton"
+          aria-label="Reservar hora">Reservar hora</a
+        >
+        <a class="btn btn-secondary" href="#tu-cita" aria-label="Conoce más"
+          >Conoce más</a
+        >
+      </div>
+    </div>
   </div>
 </section>
 
+<script define:vars={{ slidesData }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const slides = slidesData;
+    let currentSlideIndex = 0;
+    const intervalTime = 5000; // Cambiar cada 5 segundos
+
+    const heroSection = document.getElementById("hero-section");
+    const backgroundImages = heroSection.querySelectorAll(
+      ".hero__background-image",
+    );
+    const headingElement = document.getElementById("hero-heading");
+    const subheadingElement = document.getElementById("hero-subheading");
+    const textElements = [headingElement, subheadingElement];
+
+    function updateSlideContent(index) {
+      // Actualizar textos con efecto fade
+      textElements.forEach((el) => el.classList.remove("active"));
+
+      setTimeout(() => {
+        // Crear el HTML para el encabezado con la palabra resaltada
+        const heading = slides[index].heading;
+        const highlightWord = slides[index].highlightWord;
+
+        // Reemplazar la palabra a resaltar con la versión con clase highlight
+        const formattedHeading = heading.replace(
+          highlightWord,
+          `<span class="text-highlight">${highlightWord}</span>`,
+        );
+
+        headingElement.innerHTML = formattedHeading;
+        subheadingElement.textContent = slides[index].subheading;
+        textElements.forEach((el) => el.classList.add("active"));
+      }, 300); // Esperar un poco para que termine el fade-out
+
+      // Actualizar imagen de fondo con efecto fade
+      backgroundImages.forEach((img, imgIndex) => {
+        if (imgIndex === index) {
+          img.classList.add("active");
+        } else {
+          img.classList.remove("active");
+        }
+      });
+    }
+
+    // Inicializar con el primer slide
+    updateSlideContent(currentSlideIndex);
+
+    // Cambiar slide periódicamente
+    setInterval(() => {
+      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+      updateSlideContent(currentSlideIndex);
+    }, intervalTime);
+
+    // Abrir modal al hacer clic en el botón
+    const openModalButton = document.getElementById("openModalButton");
+    if (openModalButton) {
+      openModalButton.addEventListener("click", () => {
+        const modal = document.getElementById("cita-modal");
+        if (modal) modal.classList.add("show");
+      });
+    }
+  });
+</script>
+
 <style>
+  /* Importar fuente DM Sans */
+  @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
   .hero {
     position: relative;
     width: 100%;
@@ -60,223 +211,250 @@ import fondoImage from "/public/assets/images/banner.png";
     overflow: hidden;
     display: flex;
     color: white;
+    font-family: "DM Sans", sans-serif;
+  }
+
+  .hero__background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+  }
+
+  .hero__background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 85% center; /* Desplazado más a la derecha */
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    z-index: 1;
+  }
+
+  .hero__background-image.active {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(
       90deg,
-      rgba(27, 81, 78, 0.8) 0%,
-      rgba(61, 183, 176, 0.8) 100%
+      rgba(27, 81, 78, 0.9) 0%,
+      rgba(61, 183, 176, 0.2) 30%,
+      rgba(61, 183, 176, 0.2) 70%,
+      rgba(27, 81, 78, 0.9) 100%
     );
+    z-index: -1;
   }
 
+  /* Contenedor principal posicionado más a la izquierda */
   .hero__content {
-    flex: 0 0 40%;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 3;
+    padding-left: 10%; /* Reducido para estar más a la izquierda */
+  }
+
+  .hero__content-inner {
+    max-width: 500px;
+    text-align: left; /* Alineación a la izquierda */
+  }
+
+  /* Logo también alineado a la izquierda */
+  .hero__logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .hero__logo-img {
+    width: 150px;
+    height: auto;
+  }
+
+  /* Contenedor de altura fija para evitar layout shift */
+  .hero__text-fixed-container {
+    min-height: 170px; /* Altura fija para evitar saltos */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 2rem;
+    justify-content: flex-start; /* Alinear desde arriba */
+    margin-bottom: 20px;
+    width: 100%;
   }
 
-  .hero__banner {
-    flex: 0 0 60%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-
-  .banner-image {
-    height: 100%;
-    width: auto;
-    max-width: none;
-    object-fit: cover;
-  }
-
-  .hero__image img {
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  .hero__texts h1 {
+  /* Título principal con mejor gestión del texto */
+  #hero-heading {
+    font-family: "DM Sans", sans-serif;
     font-weight: 700;
-    font-size: 60px;
-    line-height: 72px;
-    letter-spacing: -0.06em;
-    margin: 0;
+    font-size: 52px; 
+    line-height: 1.1;
+    margin: 0 0 15px;
+    text-align: left;
+    white-space: normal; /* Permitir que el texto se ajuste */
+    overflow-wrap: break-word; /* Romper palabras muy largas */
+    word-wrap: break-word; /* Para mayor compatibilidad */
+    max-width: 100%; /* Asegurar que no desborde */
+    font-size-adjust: 0.5; /* Ajustar tamaño de fuente automáticamente si es necesario */
   }
 
+  /* Prevenir que palabras específicas se dividan */
+  .text-nowrap {
+    white-space: nowrap;
+  }
+
+  /* Subtítulo con mejor gestión del texto */
   .hero__instructions {
+    font-family: "DM Sans", sans-serif;
     font-weight: 400;
-    font-size: 31px;
-    line-height: 37.2px;
-    letter-spacing: -0.06em;
-    margin-top: 1rem;
+    font-size: 20px;
+    line-height: 1.3;
+    margin: 0;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
   }
 
+  /* Color para la palabra destacada */
+  .text-highlight {
+    color: #f6c61b;
+  }
+
+  /* Subtítulo centrado y más pequeño */
+  .hero__instructions {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 400;
+    font-size: 20px; /* Tamaño reducido para mejor ajuste */
+    line-height: 1.3;
+    margin: 0;
+    text-align: left;
+  }
+
+  /* Estilos para la transición de texto */
+  .fade-element {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .fade-element.active {
+    opacity: 1;
+  }
+
+  /* Botones alineados a la izquierda */
   .hero__buttons {
-    text-align: center;
-    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
   }
 
   .btn {
     display: inline-block;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: 600;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 500;
     text-align: center;
     text-decoration: none;
     border-radius: 30px;
-    transition: all 0.4s ease;
-    margin: 10px 0.5rem;
+    transition: all 0.3s ease;
     cursor: pointer;
-    width: 231px;
-    height: 57px;
     background-color: transparent;
     color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    min-width: 160px;
+    white-space: nowrap;
+    backdrop-filter: blur(2px);
   }
 
-  .btn-primary,
-  .btn-secondary {
-    border: 2px solid rgba(255, 255, 255, 0.3);
+  .btn:hover,
+  .btn:focus {
+    border-color: #ffffff;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
-  .btn-primary:hover,
-  .btn-primary:focus,
-  .btn-primary:active,
-  .btn-secondary:hover,
-  .btn-secondary:focus,
-  .btn-secondary:active {
-    border-color: #3db7b0;
-    color: #3db7b0;
-  }
-
-  .text-gradient {
-    background-image: linear-gradient(45deg, #00c6ff, #0072ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-
+  /* Media Queries para mantener el diseño responsivo */
   @media (max-width: 1200px) {
-    .hero__texts h1 {
-      font-size: 50px;
-      line-height: 60px;
-    }
-
-    .hero__instructions {
-      font-size: 26px;
-      line-height: 32px;
-    }
-
-    .btn {
-      width: 200px;
-      height: 50px;
+    .hero__content {
+      padding-left: 10%;
     }
   }
 
-  @media (max-width: 1024px) {
-    .hero {
-      flex-direction: column;
-      height: 100vh;
-      padding-top: 60px;
-      background:
-        linear-gradient(
-          90deg,
-          rgba(27, 81, 78, 0.8) 0%,
-          rgba(61, 183, 176, 0.8) 100%
-        ),
-        url("../assets/images/banner.png") no-repeat center center;
-      background-size: cover;
-    }
-
+  @media (max-width: 992px) {
     .hero__content {
-      width: 100%;
-      flex: 1;
-    }
-
-    .hero__banner {
-      display: none;
-    }
-
-    .hero__image img {
-      width: 75%;
-      max-width: 300px;
-      height: auto;
-      margin: 0 auto;
-    }
-
-    .hero__texts h1 {
-      font-size: 40px;
-      line-height: 48px;
-    }
-
-    .hero__instructions {
-      font-size: 22px;
-      line-height: 28px;
-    }
-
-    .btn {
-      width: 180px;
-      height: 45px;
+      padding-left: 5%;
     }
   }
 
   @media (max-width: 768px) {
-    .hero {
-      height: 100vh;
-      padding-top: 40px;
+    .hero__content {
+      justify-content: center;
+      padding-left: 0;
     }
 
-    .hero__image img {
-      width: 75%;
-      max-width: 250px;
-      height: auto;
-      margin: 0 auto;
+    .hero__content-inner {
+      max-width: 90%;
+      padding: 0 20px;
     }
 
-    .hero__texts h1 {
-      font-size: 32px;
-      line-height: 38px;
+    .hero__logo-img {
+      width: 100px;
+    }
+
+    .hero__text-fixed-container {
+      min-height: 140px;
+    }
+
+    #hero-heading {
+      font-size: 40px;
+      white-space: normal; /* Permitir múltiples líneas en móvil */
     }
 
     .hero__instructions {
       font-size: 18px;
-      line-height: 24px;
-    }
-
-    .btn {
-      width: 160px;
-      height: 40px;
     }
   }
 
-  @media (max-width: 480px) {
-    .hero {
-      height: 100vh;
-      padding-top: 20px;
+  @media (max-width: 576px) {
+    .hero__text-fixed-container {
+      min-height: 120px;
     }
 
-    .hero__image img {
-      width: 75%;
-      max-width: 200px;
-      height: auto;
-      margin: 0 auto;
+    .hero__logo-img {
+      width: 80px;
     }
 
-    .hero__texts h1 {
-      font-size: 28px;
-      line-height: 34px;
+    #hero-heading {
+      font-size: 32px;
     }
 
     .hero__instructions {
       font-size: 16px;
-      line-height: 20px;
+    }
+
+    .hero__buttons {
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
     }
 
     .btn {
-      width: 160px;
-      height: 40px;
+      width: 100%;
+      max-width: 200px;
     }
   }
 </style>
