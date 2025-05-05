@@ -250,8 +250,8 @@ const slidesData = slides.map((slide) => ({
     background: linear-gradient(
       90deg,
       rgba(27, 81, 78, 0.9) 0%,
-      rgba(61, 183, 176, 0.2) 30%,
-      rgba(61, 183, 176, 0.2) 70%,
+      rgba(61, 183, 176, 0.3) 30%,
+      rgba(61, 183, 176, 0.3) 70%,
       rgba(27, 81, 78, 0.9) 100%
     );
     z-index: -1;
@@ -272,9 +272,9 @@ const slidesData = slides.map((slide) => ({
   .hero__content-inner {
     max-width: 500px;
     text-align: left; /* Alineación a la izquierda */
+    /* Eliminado el fondo semi-transparente */
   }
 
-  /* Logo también alineado a la izquierda */
   .hero__logo-container {
     display: flex;
     justify-content: center;
@@ -309,6 +309,7 @@ const slidesData = slides.map((slide) => ({
     word-wrap: break-word; /* Para mayor compatibilidad */
     max-width: 100%; /* Asegurar que no desborde */
     font-size-adjust: 0.5; /* Ajustar tamaño de fuente automáticamente si es necesario */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra de texto para mejor legibilidad */
   }
 
   /* Prevenir que palabras específicas se dividan */
@@ -328,11 +329,13 @@ const slidesData = slides.map((slide) => ({
     overflow-wrap: break-word;
     word-wrap: break-word;
     max-width: 100%;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Sombra de texto más pronunciada para mejor legibilidad */
   }
 
   /* Color para la palabra destacada */
   .text-highlight {
     color: #f6c61b;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Sombra específica para texto destacado */
   }
 
   /* Subtítulo centrado y más pequeño */
@@ -372,19 +375,17 @@ const slidesData = slides.map((slide) => ({
     border-radius: 30px;
     transition: all 0.3s ease;
     cursor: pointer;
-    background-color: transparent;
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.5);
     min-width: 160px;
     white-space: nowrap;
-    backdrop-filter: blur(2px);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Añadido sombra al texto de los botones */
   }
 
   .btn:hover,
   .btn:focus {
     border-color: #ffffff;
     color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.1);
   }
 
   /* Media Queries para mantener el diseño responsivo */
@@ -412,7 +413,7 @@ const slidesData = slides.map((slide) => ({
 
     .hero__content-inner {
       max-width: 90%;
-      padding: 0 20px;
+      padding: 15px; /* Ajustado para móviles */
     }
 
     .hero__logo-img {
