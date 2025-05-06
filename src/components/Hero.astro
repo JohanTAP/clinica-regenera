@@ -160,17 +160,26 @@ const slidesData = slides.map((slide) => ({
 </section>
 
 <script define:vars={{ slidesData }}>
-  document.addEventListener("DOMContentLoaded", () => {
+  // Función principal para inicializar el hero
+  function initializeHero() {
     const slides = slidesData;
     let currentSlideIndex = 0;
     const intervalTime = 5000; // Cambiar cada 5 segundos
+    let slideInterval; // Variable para almacenar el intervalo
 
     const heroSection = document.getElementById("hero-section");
+    // Si no existe el hero en esta página, salir
+    if (!heroSection) return;
+
     const backgroundImages = heroSection.querySelectorAll(
       ".hero__background-image",
     );
     const headingElement = document.getElementById("hero-heading");
     const subheadingElement = document.getElementById("hero-subheading");
+
+    // Si no existen los elementos necesarios, salir
+    if (!headingElement || !subheadingElement) return;
+
     const textElements = [headingElement, subheadingElement];
 
     function updateSlideContent(index) {
@@ -182,11 +191,14 @@ const slidesData = slides.map((slide) => ({
         const heading = slides[index].heading;
         const highlightWord = slides[index].highlightWord;
 
-        // Reemplazar la palabra a resaltar con la versión con clase highlight
-        const formattedHeading = heading.replace(
-          highlightWord,
-          `<span class="text-highlight">${highlightWord}</span>`,
-        );
+        // Solo reemplazar si hay una palabra para destacar
+        let formattedHeading = heading;
+        if (highlightWord && highlightWord.length > 0) {
+          formattedHeading = heading.replace(
+            highlightWord,
+            `<span class="text-highlight">${highlightWord}</span>`,
+          );
+        }
 
         headingElement.innerHTML = formattedHeading;
         subheadingElement.textContent = slides[index].subheading;
@@ -203,35 +215,51 @@ const slidesData = slides.map((slide) => ({
       });
     }
 
-    // Inicializar con el primer slide
-    updateSlideContent(currentSlideIndex);
-
-    // Cambiar slide periódicamente
-    setInterval(() => {
-      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-      updateSlideContent(currentSlideIndex);
-    }, intervalTime);
-
     // Función para abrir el modal
     function openModal() {
       const modal = document.getElementById("cita-modal");
       if (modal) modal.classList.add("show");
     }
 
-    // Abrir modal al hacer clic en el botón principal
-    const openModalButton = document.getElementById("openModalButton");
-    if (openModalButton) {
-      openModalButton.addEventListener("click", openModal);
+    // Limpiar intervalo anterior si existe
+    if (slideInterval) {
+      clearInterval(slideInterval);
     }
 
-    // Abrir modal al hacer clic en el botón móvil
-    const openModalButtonMobile = document.getElementById(
-      "openModalButtonMobile",
-    );
-    if (openModalButtonMobile) {
-      openModalButtonMobile.addEventListener("click", openModal);
-    }
-  });
+    // Inicializar con el primer slide
+    updateSlideContent(currentSlideIndex);
+
+    // Cambiar slide periódicamente con un nuevo intervalo
+    slideInterval = setInterval(() => {
+      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+      updateSlideContent(currentSlideIndex);
+    }, intervalTime);
+
+    // Configurar event listeners para los botones
+    const setupButtonListeners = () => {
+      // Abrir modal al hacer clic en el botón principal
+      const openModalButton = document.getElementById("openModalButton");
+      if (openModalButton) {
+        openModalButton.addEventListener("click", openModal);
+      }
+
+      // Abrir modal al hacer clic en el botón móvil
+      const openModalButtonMobile = document.getElementById(
+        "openModalButtonMobile",
+      );
+      if (openModalButtonMobile) {
+        openModalButtonMobile.addEventListener("click", openModal);
+      }
+    };
+
+    setupButtonListeners();
+  }
+
+  // Inicializar al cargar el DOM
+  document.addEventListener("DOMContentLoaded", initializeHero);
+
+  // Reinicializar con cada navegación usando View Transitions
+  document.addEventListener("astro:page-load", initializeHero);
 </script>
 
 <style>
