@@ -41,7 +41,8 @@ const slides = [
     alt: "Sesión de fisioterapia en Clínica Regenera",
     heading: "<span class='text-nowrap'>Psiconeuro-</span>inmunología",
     highlightWord: "",
-    subheading: "Estudia cómo mente, cuerpo y emociones se conectan para mejorar la salud",
+    subheading:
+      "Estudia cómo mente, cuerpo y emociones se conectan para mejorar la salud",
     imageFormat: "jpg",
   },
   {
@@ -57,7 +58,8 @@ const slides = [
     alt: "Terapia manual en Clínica Regenera",
     heading: "Suplementación",
     highlightWord: "calidad de vida",
-    subheading: "Soluciones efectivas para dIncorpora vitaminas, minerales u otros nutrientes que  tu cuerpo necesita.",
+    subheading:
+      "Soluciones efectivas para dIncorpora vitaminas, minerales u otros nutrientes que  tu cuerpo necesita.",
     imageFormat: "jpg",
   },
 ];
@@ -121,8 +123,8 @@ const slidesData = slides.map((slide) => ({
         </p>
       </div>
 
-      <!-- Botones en línea -->
-      <div class="hero__buttons">
+      <!-- Botones en línea solo para versión desktop -->
+      <div class="hero__buttons desktop-only">
         <a
           class="btn btn-primary"
           id="openModalButton"
@@ -132,6 +134,26 @@ const slidesData = slides.map((slide) => ({
           >Conoce más</a
         >
       </div>
+    </div>
+  </div>
+
+  <!-- Contenedor de botones para móvil, aparecerá en la parte inferior -->
+  <div class="hero__buttons-container mobile-only">
+    <div class="hero__contact-text">
+      <div class="hero__contact-title">
+        ¿QUIERES CONTACTAR A CLÍNICA REGENERA?
+      </div>
+      <div class="hero__contact-subtitle">OCUPA NUESTROS CANALES DIGITALES</div>
+    </div>
+    <div class="hero__buttons">
+      <a
+        class="btn btn-primary"
+        id="openModalButtonMobile"
+        aria-label="Reservar hora">Reservar hora</a
+      >
+      <a class="btn btn-secondary" href="#tu-cita" aria-label="Conoce más"
+        >Conoce más</a
+      >
     </div>
   </div>
 </section>
@@ -189,13 +211,24 @@ const slidesData = slides.map((slide) => ({
       updateSlideContent(currentSlideIndex);
     }, intervalTime);
 
-    // Abrir modal al hacer clic en el botón
+    // Función para abrir el modal
+    function openModal() {
+      const modal = document.getElementById("cita-modal");
+      if (modal) modal.classList.add("show");
+    }
+
+    // Abrir modal al hacer clic en el botón principal
     const openModalButton = document.getElementById("openModalButton");
     if (openModalButton) {
-      openModalButton.addEventListener("click", () => {
-        const modal = document.getElementById("cita-modal");
-        if (modal) modal.classList.add("show");
-      });
+      openModalButton.addEventListener("click", openModal);
+    }
+
+    // Abrir modal al hacer clic en el botón móvil
+    const openModalButtonMobile = document.getElementById(
+      "openModalButtonMobile",
+    );
+    if (openModalButtonMobile) {
+      openModalButtonMobile.addEventListener("click", openModal);
     }
   });
 </script>
@@ -300,7 +333,7 @@ const slidesData = slides.map((slide) => ({
   #hero-heading {
     font-family: "DM Sans", sans-serif;
     font-weight: 700;
-    font-size: 52px; 
+    font-size: 52px;
     line-height: 1.1;
     margin: 0 0 15px;
     text-align: left;
@@ -363,6 +396,8 @@ const slidesData = slides.map((slide) => ({
     display: flex;
     gap: 20px;
     justify-content: flex-start;
+    position: relative;
+    z-index: 4;
   }
 
   .btn {
@@ -386,6 +421,16 @@ const slidesData = slides.map((slide) => ({
   .btn:focus {
     border-color: #ffffff;
     color: #ffffff;
+    background-color: rgba(27, 81, 78, 0.5);
+  }
+
+  /* Ocultar/mostrar elementos según el dispositivo */
+  .desktop-only {
+    display: flex;
+  }
+
+  .mobile-only {
+    display: none;
   }
 
   /* Media Queries para mantener el diseño responsivo */
@@ -399,21 +444,32 @@ const slidesData = slides.map((slide) => ({
     .hero__content {
       padding-left: 5%;
     }
-    
+
     .hero__background-image {
       object-position: 65% center; /* Ajustado para tabletas */
     }
   }
 
   @media (max-width: 768px) {
+    .desktop-only {
+      display: none;
+    }
+
+    .mobile-only {
+      display: flex;
+    }
+
     .hero__content {
       justify-content: center;
       padding-left: 0;
+      padding-bottom: 0; /* Eliminamos el padding-bottom anterior */
+      flex-direction: column; /* Organizamos en columna para separar el contenido de los botones */
+      display: flex;
     }
 
     .hero__content-inner {
       max-width: 90%;
-      padding: 15px; /* Ajustado para móviles */
+      margin-top: 50px; /* Espacio superior para el contenido principal */
     }
 
     .hero__logo-img {
@@ -432,9 +488,57 @@ const slidesData = slides.map((slide) => ({
     .hero__instructions {
       font-size: 18px;
     }
-    
+
     .hero__background-image {
       object-position: center center; /* Centrado para móviles */
+    }
+
+    /* Banner para los botones en móvil */
+    .hero__buttons-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(27, 81, 78, 0) 0%,
+        rgba(27, 81, 78, 0.85) 50%,
+        rgba(27, 81, 78, 0.9) 100%
+      );
+      backdrop-filter: blur(3px);
+      padding: 40px 20px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+    }
+
+    /* Texto de contacto */
+    .hero__contact-text {
+      text-align: center;
+      margin-bottom: 15px;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero__contact-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .hero__contact-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .hero__buttons {
+      position: relative;
+      width: 100%;
+      justify-content: center;
+      padding: 15px 0;
+      margin-top: 10px;
+      gap: 20px;
     }
   }
 
@@ -456,18 +560,34 @@ const slidesData = slides.map((slide) => ({
     }
 
     .hero__buttons {
-      flex-direction: column;
+      flex-direction: row; /* Mantener en fila para pantallas pequeñas */
       gap: 15px;
       align-items: center;
+      justify-content: center;
     }
 
     .btn {
-      width: 100%;
-      max-width: 200px;
+      padding: 12px 20px;
+      font-size: 14px;
+      min-width: auto;
+      flex: 1;
+      max-width: 150px;
     }
-    
+
     .hero__background-image {
       object-position: 45% center; /* Ligeramente hacia la izquierda en móviles pequeños */
+    }
+
+    .hero__buttons-container {
+      padding: 30px 15px 20px; /* Reducir padding en pantallas muy pequeñas */
+    }
+
+    .hero__contact-title {
+      font-size: 16px;
+    }
+
+    .hero__contact-subtitle {
+      font-size: 12px;
     }
   }
 </style>
