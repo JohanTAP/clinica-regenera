@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import logoBlanco from "/public/assets/images/logo-blanco.webp";
 // Importar las imágenes de slides disponibles
 import fondoImage1 from "/public/assets/images/Slide 1.jpg";
 import fondoImage2 from "/public/assets/images/Slide 2.jpg";
@@ -126,13 +125,17 @@ const slidesData = slides.map((slide) => ({
 
       <!-- Botones en línea solo para versión desktop -->
       <div class="hero__buttons desktop-only">
-        <a
-          class="btn btn-primary"
+        <button
+          class="btn btn-primary open-modal-btn"
           id="openModalButton"
-          aria-label="Reservar hora">Reservar hora</a
+          type="button"
+          aria-label="Reservar hora">Reservar hora</button
         >
-        <a class="btn btn-secondary" href="#tu-cita" aria-label="Conoce más"
-          >Conoce más</a
+        <button
+          class="btn btn-secondary"
+          type="button"
+          aria-label="Conoce más"
+          onclick="window.location.href='#tu-cita'">Conoce más</button
         >
       </div>
     </div>
@@ -147,13 +150,16 @@ const slidesData = slides.map((slide) => ({
       <div class="hero__contact-subtitle">OCUPA NUESTROS CANALES DIGITALES</div>
     </div>
     <div class="hero__buttons">
-      <a
-        class="btn btn-primary"
-        id="openModalButtonMobile"
-        aria-label="Reservar hora">Reservar hora</a
+      <button
+        class="btn btn-primary open-modal-btn"
+        type="button"
+        aria-label="Reservar hora">Reservar hora</button
       >
-      <a class="btn btn-secondary" href="#tu-cita" aria-label="Conoce más"
-        >Conoce más</a
+      <button
+        class="btn btn-secondary"
+        type="button"
+        aria-label="Conoce más"
+        onclick="window.location.href='#tu-cita'">Conoce más</button
       >
     </div>
   </div>
@@ -215,10 +221,44 @@ const slidesData = slides.map((slide) => ({
       });
     }
 
-    // Función para abrir el modal
+    // Función para abrir el modal (usa el script global para mostrarlo)
     function openModal() {
-      const modal = document.getElementById("cita-modal");
-      if (modal) modal.classList.add("show");
+      const modal = document.getElementById("modal");
+      if (modal) {
+        modal.style.display = "flex";
+        modal.setAttribute("aria-modal", "true");
+        // Agregar listeners para cerrar el modal
+        const closeModalButton = modal.querySelector("#closeModal");
+        const modalContent = modal.querySelector(".modal__content");
+        // Cerrar al hacer click en la X
+        if (closeModalButton) {
+          closeModalButton.onclick = () => {
+            modal.style.display = "none";
+            modal.setAttribute("aria-modal", "false");
+          };
+        }
+        // Cerrar al hacer click fuera del contenido
+        modal.onclick = (e) => {
+          if (
+            e.target === modal &&
+            modalContent &&
+            !modalContent.contains(e.target)
+          ) {
+            modal.style.display = "none";
+            modal.setAttribute("aria-modal", "false");
+          }
+        };
+        // Cerrar con ESC
+        modal.onkeydown = (e) => {
+          if (e.key === "Escape") {
+            modal.style.display = "none";
+            modal.setAttribute("aria-modal", "false");
+          }
+        };
+        // Dar foco al modal para que reciba el evento ESC
+        modal.tabIndex = -1;
+        modal.focus();
+      }
     }
 
     // Limpiar intervalo anterior si existe
@@ -235,24 +275,18 @@ const slidesData = slides.map((slide) => ({
       updateSlideContent(currentSlideIndex);
     }, intervalTime);
 
-    // Configurar event listeners para los botones
+    // Configurar event listeners para los botones (mejor práctica: por clase)
     const setupButtonListeners = () => {
-      // Abrir modal al hacer clic en el botón principal
-      const openModalButton = document.getElementById("openModalButton");
-      if (openModalButton) {
-        openModalButton.addEventListener("click", openModal);
-      }
-
-      // Abrir modal al hacer clic en el botón móvil
-      const openModalButtonMobile = document.getElementById(
-        "openModalButtonMobile",
-      );
-      if (openModalButtonMobile) {
-        openModalButtonMobile.addEventListener("click", openModal);
-      }
+      const modalButtons = heroSection.querySelectorAll(".open-modal-btn");
+      modalButtons.forEach((btn) => {
+        // Elimina cualquier listener previo para evitar duplicados
+        btn.removeEventListener("click", openModal);
+        btn.addEventListener("click", openModal);
+      });
     };
 
-    setupButtonListeners();
+    // Espera a que el DOM esté completamente renderizado antes de agregar listeners
+    setTimeout(setupButtonListeners, 0);
   }
 
   // Inicializar al cargar el DOM
@@ -443,14 +477,15 @@ const slidesData = slides.map((slide) => ({
     border: 1px solid rgba(255, 255, 255, 0.5);
     min-width: 160px;
     white-space: nowrap;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Añadido sombra al texto de los botones */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    background-color: transparent;
   }
 
   .btn:hover,
   .btn:focus {
     border-color: #ffffff;
     color: #ffffff;
-    background-color: rgba(27, 81, 78, 0.5);
+    background-color: rgba(27, 81, 78, 0.2);
   }
 
   /* Ocultar/mostrar elementos según el dispositivo */

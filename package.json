@@ -1,7 +1,7 @@
 {
   "name": "clinica-regenera",
   "type": "module",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -12,7 +12,7 @@
   "dependencies": {
     "@justinribeiro/lite-youtube": "^1.5.0",
     "@lucide/astro": "^0.501.0",
-    "astro": "^5.7.10",
+    "astro": "^5.7.12",
     "lite-youtube-embed": "^0.3.3",
     "marked": "^15.0.8",
     "sharp": "^0.34.0"
