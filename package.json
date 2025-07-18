@@ -12,7 +12,7 @@
   "dependencies": {
     "@justinribeiro/lite-youtube": "^1.5.0",
     "@lucide/astro": "^0.501.0",
-    "astro": "^5.7.12",
+    "astro": "^5.12.0",
     "lite-youtube-embed": "^0.3.3",
     "marked": "^15.0.8",
     "sharp": "^0.34.0"
